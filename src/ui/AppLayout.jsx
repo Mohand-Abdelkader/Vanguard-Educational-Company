@@ -5,6 +5,7 @@ import TeamMembers from "../features/teamMember/TeamMembers";
 import ProjectService from "../features/projectService/ProjectService";
 import Activities from "../features/activities/Activities";
 import AnimatedLogoCloud from "../features/logos/AnimatedLogoCloud";
+import ContactUs from "./ContactUs";
 
 function AppLayout() {
   return (
@@ -41,17 +42,16 @@ function AppLayout() {
 
       {/* Our Partners */}
       <section id="Partners" className="py-20 bg-white dark:bg-gray-800">
-
         <AnimatedLogoCloud />
       </section>
 
       {/* Contact Section */}
-      {/* <section id="contact" className="py-20 bg-white dark:bg-gray-800">
+      <section id="contact" className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-primary mb-12">Contact Us</h2>
-          <ContactForm />
+          <ContactUs />
         </div>
-      </section> */}
+      </section>
     </div>
   );
 }
