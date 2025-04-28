@@ -1,9 +1,9 @@
 import { Heart, Star, Eye } from "lucide-react";
 function AppLayout() {
   return (
-    <div className="min-h-screen bg-primary/5 dark:bg-gray-900">
+    <div className="min-h-screen bg-primary/5 dark:bg-accent">
       {/* Hero Section */}
-      <section id="home" className="bg-primary/10 dark:bg-gray-800 pt-16">
+      <section id="home" className="bg-primary/10 dark:bg-accent/90 pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-8 animate-fade-in">
@@ -35,7 +35,7 @@ function AppLayout() {
       </section>
 
       {/* Keep other sections but update their colors */}
-      <section id="about" className="py-20 bg-white dark:bg-gray-800">
+      <section id="about" className="py-20 bg-white dark:bg-accent/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-primary mb-8">About Us</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -97,7 +97,7 @@ function AppLayout() {
       </section>
 
       {/* Shared Portal Section */}
-      <section id="portal" className="py-20 bg-primary/10 dark:bg-gray-900">
+      <section id="portal" className="py-20 bg-primary/10 dark:bg-accent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-primary mb-8">
             Shared Portal
@@ -112,7 +112,7 @@ function AppLayout() {
       </section>
 
       {/* Team & Services Section */}
-      <section id="team" className="py-20 bg-white dark:bg-gray-800">
+      <section id="team" className="py-20 bg-white dark:bg-accent/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-primary mb-8">
             Our Team & Services
@@ -132,7 +132,7 @@ function AppLayout() {
       </section>
 
       {/* Activities & Partners */}
-      <section id="activities" className="py-20 bg-primary/10 dark:bg-gray-900">
+      <section id="activities" className="py-20 bg-primary/10 dark:bg-accent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-primary mb-8">
             Activities & Partners

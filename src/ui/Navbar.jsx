@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Home, Users, Video, Moon, Sun } from "lucide-react";
-import Button from "./Button";
+// import Button from "./Button";
 // import { useTheme } from "next-themes";
 function Navbar() {
   //   const { theme, setTheme } = useTheme();
@@ -16,7 +16,7 @@ function Navbar() {
     }
   };
   return (
-    <nav className="fixed w-full top-0 z-50 bg-primary dark:bg-gray-900 shadow-lg">
+    <nav className="fixed w-full top-0 z-50 bg-primary dark:bg-accent shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">

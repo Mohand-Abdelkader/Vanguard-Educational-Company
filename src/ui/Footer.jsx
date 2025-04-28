@@ -8,7 +8,7 @@ import {
 
 function Footer() {
   return (
-    <footer className="bg-[#058088] text-white py-12">
+    <footer className="bg-primary text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -26,7 +26,7 @@ function Footer() {
               <li>
                 <a
                   href="#about"
-                  className="hover:text-[#02b8a9] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   About Us
                 </a>
@@ -34,7 +34,7 @@ function Footer() {
               <li>
                 <a
                   href="#services"
-                  className="hover:text-[#02b8a9] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   Services
                 </a>
@@ -42,7 +42,7 @@ function Footer() {
               <li>
                 <a
                   href="#activities"
-                  className="hover:text-[#02b8a9] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   Activities
                 </a>
@@ -50,7 +50,7 @@ function Footer() {
               <li>
                 <a
                   href="#contact"
-                  className="hover:text-[#02b8a9] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   Contact
                 </a>
@@ -65,7 +65,7 @@ function Footer() {
               <li>
                 <a
                   href="#portal"
-                  className="hover:text-[#02b8a9] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   Shared Portal
                 </a>
@@ -73,7 +73,7 @@ function Footer() {
               <li>
                 <a
                   href="#commercial"
-                  className="hover:text-[#02b8a9] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   Commercial Videos
                 </a>
@@ -81,7 +81,7 @@ function Footer() {
               <li>
                 <a
                   href="#team"
-                  className="hover:text-[#02b8a9] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   Our Team
                 </a>
@@ -93,23 +93,23 @@ function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-lg">Follow Us</h4>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-[#02b8a9] transition-colors">
+              <a href="#" className="hover:text-secondary transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-[#02b8a9] transition-colors">
+              <a href="#" className="hover:text-secondary transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-[#02b8a9] transition-colors">
+              <a href="#" className="hover:text-secondary transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-[#02b8a9] transition-colors">
+              <a href="#" className="hover:text-secondary transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-[#4e314f] mt-8 pt-8 flex items-center justify-center text-sm text-gray-200">
+        <div className="border-t border-primary-dark mt-8 pt-8 flex items-center justify-center text-sm text-gray-200">
           <Copyright className="h-4 w-4 mr-2" />
           <p>{new Date().getFullYear()} Company Name. All rights reserved.</p>
         </div>
