@@ -1,4 +1,4 @@
-function TextArea({ className, placeholder }) {
+function TextArea({ placeholder }) {
   return (
     <textarea
       placeholder={placeholder}
