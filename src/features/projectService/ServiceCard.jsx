@@ -1,6 +1,6 @@
 import * as LucideIcons from "lucide-react";
 
-function ServiceCard({ icon, title, description, color = "#058088" }) {
+function ServiceCard({ icon, title, description, color = "#509951" }) {
   const IconComponent = LucideIcons[icon];
   return (
     <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group">

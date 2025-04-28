@@ -9,21 +9,21 @@ const services = [
     info: "Course 1: Leadership and Management: Bief content about the course that highlights skills, objectives, and key outcomes.",
   },
   {
-    icon: "Layers",
+    icon: "Handshake",
     title: "Accreditation Partners",
     description:
       "Vanguard partners with prestigious accreditation bodies. Click on any organization below for more details.",
     info: "Array Global is a leading body in international accreditation. Learn more about their standards and how Vanguard collaborates with them.",
   },
   {
-    icon: "Layers",
+    icon: "Book",
     title: "Educational Management Services",
     description:
       "Discover the schools and organizations that Vanguard supports through comprehensive management and recruitment services.",
     info: "Future Leaders School Vanguard manages daily operations and strategic planning for Future Leaders.",
   },
   {
-    icon: "Layers",
+    icon: "Container",
     title: "Educational Supplies & Procurement",
     description:
       "Vanguard provides essential educational materials, including books (Egypt and Cambridge curricula) and customized supplies for schools.",
