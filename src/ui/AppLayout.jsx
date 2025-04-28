@@ -11,7 +11,10 @@ function AppLayout() {
   return (
     <div className="min-h-screen bg-primary/5 dark:bg-accent">
       {/* Hero Section */}
-      <section id="home" className="bg-primary/10 dark:bg-accent/90 pt-16">
+      <section
+        id="home"
+        className="bg-gradient-to-br from-primary/5 via-primary/10 to-secondary/5 dark:from-accent/90 dark:via-accent/80 dark:to-primary/10 pt-16"
+      >
         <Hero />
       </section>
 
