@@ -12,8 +12,17 @@ export default {
         accent: "#1e1a30",
         green: {
           100: "#e6f0e6",
-          // Add more shades if needed
         },
+      },
+      // Add these new configurations
+      keyframes: {
+        "logo-cloud": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - 4rem))" },
+        },
+      },
+      animation: {
+        "logo-cloud": "logo-cloud 30s linear infinite",
       },
     },
   },

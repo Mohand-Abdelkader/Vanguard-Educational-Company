@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Home, Users, Video, Moon, Sun } from "lucide-react";
+import logo from "../assets/logo.png";
 // import Button from "./Button";
 // import { useTheme } from "next-themes";
 function Navbar() {
@@ -23,7 +24,7 @@ function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img
-                src="https://drive.google.com/file/d/1G0rLnZXLdKGniQ-ppfLqOo-MWoSp8oA4/view?usp=sharing"
+                src={logo}
                 alt="Vanguard Logo"
                 className="h-8 w-auto hover:scale-105 transition-transform duration-300"
               />
