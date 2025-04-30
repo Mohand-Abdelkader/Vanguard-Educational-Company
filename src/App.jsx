@@ -4,6 +4,8 @@ import Footer from "./ui/Footer";
 import AppLayout from "./ui/AppLayout";
 import NotFound from "./ui/NotFound";
 import CommercialVideos from "./features/videos/CommercialVideos";
+import Blog from "./features/blogs/Blog";
+import BlogPage from "./features/blogs/BlogPage";
 function App() {
   return (
     <HashRouter>
@@ -11,6 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<AppLayout />} />
         <Route path="/commercial" element={<CommercialVideos />} />
+        <Route path="/blogs" element={<Blog />} />
+        <Route path="/blogs/:title" element={<BlogPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

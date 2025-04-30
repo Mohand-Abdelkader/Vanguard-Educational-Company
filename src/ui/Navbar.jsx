@@ -12,6 +12,7 @@ import {
   Activity,
   Globe,
   ChevronDown,
+  Pen,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.png";
@@ -143,6 +144,13 @@ function Navbar() {
               >
                 <Video size={18} />
                 {t("nav.commercial")}
+              </Link>
+              <Link
+                to="/blogs"
+                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
+              >
+                <Pen size={18} />
+                blogs
               </Link>
             </div>
           </div>

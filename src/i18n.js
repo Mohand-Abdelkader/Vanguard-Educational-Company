@@ -17,7 +17,6 @@ i18n
       ar: { translation: ar },
     },
     fallbackLng: "en",
-    debug: "development",
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
