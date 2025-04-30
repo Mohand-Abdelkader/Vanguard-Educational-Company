@@ -68,3 +68,16 @@ export async function updateMember(memberId, member) {
     throw error;
   }
 }
+
+export async function deleteMember(memberId) {
+  try {
+    const response = await fetch(`${FIREBASE_URL}/members/${memberId}.json`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to delete member");
+    return true; // Return true on successful deletion
+  } catch (error) {
+    console.error("Error deleting member:", error);
+    throw error;
+  }
+}

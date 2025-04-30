@@ -1,37 +1,23 @@
+import { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
+import { getService } from "../../services/projectServiceApi";
 
-const services = [
-  {
-    icon: "Layers",
-    title: "Programs",
-    description:
-      "Explore the courses offered by Vanguard. Each course comes with a brief description to help you understand our focus areas.",
-    info: "Course 1: Leadership and Management: Bief content about the course that highlights skills, objectives, and key outcomes.",
-  },
-  {
-    icon: "Handshake",
-    title: "Accreditation Partners",
-    description:
-      "Vanguard partners with prestigious accreditation bodies. Click on any organization below for more details.",
-    info: "Array Global is a leading body in international accreditation. Learn more about their standards and how Vanguard collaborates with them.",
-  },
-  {
-    icon: "Book",
-    title: "Educational Management Services",
-    description:
-      "Discover the schools and organizations that Vanguard supports through comprehensive management and recruitment services.",
-    info: "Future Leaders School Vanguard manages daily operations and strategic planning for Future Leaders.",
-  },
-  {
-    icon: "Container",
-    title: "Educational Supplies & Procurement",
-    description:
-      "Vanguard provides essential educational materials, including books (Egypt and Cambridge curricula) and customized supplies for schools.",
-    info: "For schools requesting these services, please contact us directly or follow the procedures outlined here: Contact Vanguard with a detailed list of requested items., Receive a customized quote based on your school's needs., Complete the procurement process through our secure platform.",
-  },
-];
 function ProjectService() {
-  const projectService = services;
+  const [projectService, setProjectService] = useState([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const services = await getService();
+        setProjectService(services);
+      } catch (error) {
+        console.error("Error fetching project services:", error);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,11 +33,11 @@ function ProjectService() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {projectService.map((service) => (
             <ServiceCard
-              key={service.title}
-              title={service.title}
+              key={service.id}
+              title={service.title.en}
               icon={service.icon}
-              description={service.description}
-              info={service.info}
+              description={service.description.en}
+              info={service.info.en}
             />
           ))}
         </div>

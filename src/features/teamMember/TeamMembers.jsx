@@ -9,7 +9,6 @@ function TeamMember() {
     const fetchMembers = async () => {
       try {
         const members = await getMembers();
-        console.log("Fetched members:", members);
         setTeamMembers(members);
       } catch (error) {
         console.error("Error fetching team members:", error);
