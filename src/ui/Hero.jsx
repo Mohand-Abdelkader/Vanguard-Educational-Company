@@ -1,6 +1,9 @@
 import logo from "../assets/logo.png";
+import { useTranslation } from "react-i18next";
 
 function Hero() {
+  const { t } = useTranslation();
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
       {/* Background decorative elements */}
@@ -12,16 +15,15 @@ function Hero() {
           <div className="flex items-center gap-4">
             <div className="w-2 h-16 bg-secondary rounded-full hidden sm:block"></div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-primary dark:text-secondary leading-tight hover:scale-105 transition-transform">
-              Vanguard Educational Company
+              {t("hero.title")}
             </h1>
           </div>
           <p className="text-accent dark:text-secondary/80 text-lg sm:text-xl max-w-md capitalize">
-            Each Generation Has Its Own Genius <br /> And Knowledge Is The Power
-            For The Future
+            {t("hero.subtitle")} <br /> {t("hero.subtitlePart2")}
           </p>
           <div className="flex items-center gap-4">
             <button className="bg-secondary hover:bg-secondary-dark text-white font-medium py-3 sm:py-4 px-6 sm:px-10 rounded-full transition-all duration-300 text-base sm:text-lg hover:scale-105 hover:shadow-lg">
-              Get in Touch
+              {t("hero.getInTouch")}
             </button>
             <div className="hidden sm:block w-16 h-1 bg-primary/30 rounded-full"></div>
           </div>
@@ -46,7 +48,7 @@ function Hero() {
           {/* Logo centered properly */}
           <img
             src={logo}
-            alt="Vanguard Logo"
+            alt={t("hero.logoAlt")}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] object-contain hover:scale-105 transition-transform duration-300"
           />
         </div>

@@ -2,8 +2,11 @@ import Button from "./Button";
 import Input from "./Input";
 import Textarea from "./TextArea";
 import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function ContactUs() {
+  const { t } = useTranslation();
+
   function handleSubmit(event) {
     event.preventDefault();
   }
@@ -12,7 +15,9 @@ function ContactUs() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
-        <h2 className="text-4xl font-bold text-primary">Contact Us</h2>
+        <h2 className="text-4xl font-bold text-primary">
+          {t("contact.title")}
+        </h2>
       </div>
 
       <div className="bg-white dark:bg-accent/30 rounded-2xl shadow-lg overflow-hidden">
@@ -24,10 +29,11 @@ function ContactUs() {
 
             <div className="relative z-10">
               <MessageSquare className="h-10 w-10 mb-6" />
-              <h3 className="text-2xl font-bold mb-4">Get in Touch</h3>
+              <h3 className="text-2xl font-bold mb-4">
+                {t("contact.getInTouch")}
+              </h3>
               <p className="text-white/80 mb-8">
-                We'd love to hear from you. Please fill out this form or reach
-                out directly using the contact information below.
+                {t("contact.formDescription")}
               </p>
 
               <div className="space-y-6 mt-10">
@@ -36,7 +42,9 @@ function ContactUs() {
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Email</p>
+                    <p className="text-sm text-white/60">
+                      {t("contact.email")}
+                    </p>
                     <p>contact@example.com</p>
                   </div>
                 </div>
@@ -46,7 +54,9 @@ function ContactUs() {
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Phone</p>
+                    <p className="text-sm text-white/60">
+                      {t("contact.phone")}
+                    </p>
                     <p>+1 (555) 123-4567</p>
                   </div>
                 </div>
@@ -56,7 +66,9 @@ function ContactUs() {
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm text-white/60">Address</p>
+                    <p className="text-sm text-white/60">
+                      {t("contact.address")}
+                    </p>
                     <p>123 Business Street, Suite 100, City, ST 12345</p>
                   </div>
                 </div>
@@ -67,14 +79,14 @@ function ContactUs() {
           {/* Contact Form */}
           <div className="p-8 md:p-12">
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
-              Send us a message
+              {t("contact.sendMessage")}
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Name
+                    {t("contact.yourName")}
                   </label>
                   <Input
                     type="text"
@@ -84,7 +96,7 @@ function ContactUs() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Your Email
+                    {t("contact.yourEmail")}
                   </label>
                   <Input
                     type="email"
@@ -96,7 +108,7 @@ function ContactUs() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Subject
+                  {t("contact.subject")}
                 </label>
                 <Input
                   type="text"
@@ -107,7 +119,7 @@ function ContactUs() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Your Message
+                  {t("contact.message")}
                 </label>
                 <Textarea
                   placeholder="Tell us about your inquiry..."
@@ -120,7 +132,7 @@ function ContactUs() {
                 className="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg"
               >
                 <Send className="h-4 w-4" />
-                Send Message
+                {t("contact.submit")}
               </Button>
             </form>
           </div>

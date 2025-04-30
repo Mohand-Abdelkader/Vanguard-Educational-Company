@@ -1,8 +1,11 @@
 import { getActivities } from "../../services/activitesApi";
 import ActivityCard from "./ActivityCard";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 function Activities() {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const [activities, setActivities] = useState([]);
   const [visibleItems, setVisibleItems] = useState(4);
 
@@ -27,13 +30,14 @@ function Activities() {
       <div className="flex flex-col items-center mb-12">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
-          <h2 className="text-4xl font-bold text-primary">Our Activities</h2>
+          <h2 className="text-4xl font-bold text-primary">
+            {t("activities.title")}
+          </h2>
           <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
         </div>
 
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl text-center">
-          Discover the range of engaging activities we offer to our community
-          and members to foster growth and learning.
+          {t("activities.description")}
         </p>
       </div>
 
@@ -43,8 +47,8 @@ function Activities() {
           <ActivityCard
             key={activity.id}
             icon={activity.icon}
-            title={activity.title.en}
-            description={activity.description.en}
+            title={activity.title[lang]}
+            description={activity.description[lang]}
             color={"#509951"}
           />
         ))}
@@ -57,7 +61,7 @@ function Activities() {
             onClick={showMore}
             className="bg-secondary hover:bg-secondary-dark text-white font-medium py-2.5 px-6 rounded-full transition-all duration-300 hover:shadow-lg transform hover:scale-105"
           >
-            Show More Activities
+            {t("activities.showMore")}
           </button>
         </div>
       )}

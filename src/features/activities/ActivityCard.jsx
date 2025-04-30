@@ -1,6 +1,8 @@
 import * as LucideIcons from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function ActivityCard({ icon, title, description, color }) {
+  const { t } = useTranslation();
   const IconComponent = LucideIcons[icon];
   return (
     <div className="relative rounded-xl overflow-hidden group hover:scale-105 transition-all duration-300 bg-white dark:bg-accent/30 shadow-md h-full flex flex-col">
@@ -37,7 +39,7 @@ function ActivityCard({ icon, title, description, color }) {
             className="py-2.5 px-5 rounded-full text-white text-sm flex items-center gap-2 transition-all duration-300 group-hover:shadow-lg transform group-hover:translate-y-[-2px]"
             style={{ backgroundColor: color }}
           >
-            Learn More
+            {t("activities.learnMore")}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

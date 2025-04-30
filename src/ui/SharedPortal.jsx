@@ -1,16 +1,23 @@
 import { Users, Building, GraduationCap } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function SharedPortal() {
+  const { t } = useTranslation();
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
-        <h2 className="text-4xl font-bold text-primary">Shared Portal</h2>
+        <h2 className="text-4xl font-bold text-primary">
+          {t("portal.title", "Shared Portal")}
+        </h2>
       </div>
 
       <p className="text-gray-600 dark:text-gray-300 text-lg mb-8 max-w-3xl">
-        Access our shared resources and collaborate with team members through
-        our dedicated portals designed for students, partners, and school staff.
+        {t(
+          "portal.description",
+          "Access our shared resources and collaborate with team members through our dedicated portals designed for students, partners, and school staff."
+        )}
       </p>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -24,15 +31,17 @@ function SharedPortal() {
             <GraduationCap className="text-primary h-8 w-8 group-hover:scale-110 transition-transform" />
           </div>
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-            Student Service
+            {t("portal.student.title", "Student Service")}
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Access learning materials, submit assignments, and track your
-            academic progress.
+            {t(
+              "portal.student.description",
+              "Access learning materials, submit assignments, and track your academic progress."
+            )}
           </p>
           <div className="flex items-center text-primary font-medium">
             <span className="group-hover:mr-2 transition-all">
-              Enter Portal
+              {t("portal.enterPortal", "Enter Portal")}
             </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,15 +70,17 @@ function SharedPortal() {
             <Building className="text-secondary h-8 w-8 group-hover:scale-110 transition-transform" />
           </div>
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-secondary transition-colors">
-            Partner Service
+            {t("portal.partner.title", "Partner Service")}
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Collaborate on projects, access shared resources, and manage
-            partnership initiatives.
+            {t(
+              "portal.partner.description",
+              "Collaborate on projects, access shared resources, and manage partnership initiatives."
+            )}
           </p>
           <div className="flex items-center text-secondary font-medium">
             <span className="group-hover:mr-2 transition-all">
-              Enter Portal
+              {t("portal.enterPortal", "Enter Portal")}
             </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -98,15 +109,17 @@ function SharedPortal() {
             <Users className="text-primary h-8 w-8 group-hover:scale-110 transition-transform" />
           </div>
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
-            School Staff Service
+            {t("portal.staff.title", "School Staff Service")}
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Manage classes, access administrative tools, and coordinate with
-            other staff members.
+            {t(
+              "portal.staff.description",
+              "Manage classes, access administrative tools, and coordinate with other staff members."
+            )}
           </p>
           <div className="flex items-center text-primary font-medium">
             <span className="group-hover:mr-2 transition-all">
-              Enter Portal
+              {t("portal.enterPortal", "Enter Portal")}
             </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"

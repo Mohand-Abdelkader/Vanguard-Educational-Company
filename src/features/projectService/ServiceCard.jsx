@@ -1,7 +1,10 @@
 import * as LucideIcons from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 function ServiceCard({ icon, title, description, color = "#509951" }) {
+  const { t } = useTranslation();
   const IconComponent = LucideIcons[icon];
+
   return (
     <div className="relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group">
       {/* Top accent color */}
@@ -31,7 +34,7 @@ function ServiceCard({ icon, title, description, color = "#509951" }) {
             className="inline-flex items-center text-sm font-medium transition-colors duration-300 group-hover:translate-x-2"
             style={{ color }}
           >
-            Learn More
+            {t("serviceCard.learnMore")}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

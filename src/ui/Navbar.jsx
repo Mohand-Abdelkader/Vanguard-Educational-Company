@@ -10,7 +10,10 @@ import {
   X,
   Share2,
   Activity,
+  Globe,
+  ChevronDown,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.png";
 import Button from "./Button";
 
@@ -18,6 +21,14 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  // Handle language change
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    setShowLanguageMenu(false);
+  };
 
   // Handle dark mode toggle
   const toggleDarkMode = () => {
@@ -94,20 +105,21 @@ function Navbar() {
 
             {/* Desktop Navigation Links */}
             <div className="hidden md:ml-6 md:flex md:space-x-4">
-              <Link
-                to="/"
+              <a
+                href="#home"
+                onClick={(e) => handleScroll(e, "home")}
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
                 <Home size={18} />
-                Home
-              </Link>
+                {t("nav.home")}
+              </a>
               <a
                 href="#portal"
                 onClick={(e) => handleScroll(e, "portal")}
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
                 <Share2 size={18} />
-                Shared Portal
+                {t("nav.sharedPortal")}
               </a>
               <a
                 href="#team"
@@ -115,7 +127,7 @@ function Navbar() {
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
                 <Users size={18} />
-                Our Team
+                {t("nav.ourTeam")}
               </a>
               <a
                 href="#activities"
@@ -123,19 +135,82 @@ function Navbar() {
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
                 <Activity size={18} />
-                Activities
+                {t("nav.activities")}
               </a>
               <Link
                 to="/commercial"
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
                 <Video size={18} />
-                Commercial
+                {t("nav.commercial")}
               </Link>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Language Switcher - Updated Modern Design */}
+            <div className="relative">
+              <button
+                className="text-white hover:text-green-100 px-3 py-1.5 rounded-full hover:bg-white/10 transition-all duration-300 flex items-center gap-2 border border-white/20"
+                onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                aria-label="Change language"
+              >
+                <Globe className="h-4 w-4" />
+                <span className="text-sm font-medium">
+                  {i18n.language === "ar" ? "العربية" : "English"}
+                </span>
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform duration-300 ${
+                    showLanguageMenu ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Language dropdown menu - Updated Modern Design */}
+              {showLanguageMenu && (
+                <div className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black/5 focus:outline-none z-50 overflow-hidden transition-all duration-300 animate-fadeIn">
+                  <div className="py-1" role="menu" aria-orientation="vertical">
+                    <button
+                      onClick={() => changeLanguage("en")}
+                      className={`${
+                        i18n.language === "en"
+                          ? "bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light font-medium"
+                          : "text-gray-700 dark:text-gray-200"
+                      } flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left transition-colors duration-200`}
+                      role="menuitem"
+                    >
+                      <span
+                        className={`h-2 w-2 rounded-full ${
+                          i18n.language === "en"
+                            ? "bg-primary"
+                            : "bg-transparent"
+                        }`}
+                      ></span>
+                      {t("language.english")}
+                    </button>
+                    <button
+                      onClick={() => changeLanguage("ar")}
+                      className={`${
+                        i18n.language === "ar"
+                          ? "bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light font-medium"
+                          : "text-gray-700 dark:text-gray-200"
+                      } flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left transition-colors duration-200`}
+                      role="menuitem"
+                    >
+                      <span
+                        className={`h-2 w-2 rounded-full ${
+                          i18n.language === "ar"
+                            ? "bg-primary"
+                            : "bg-transparent"
+                        }`}
+                      ></span>
+                      {t("language.arabic")}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Dark Mode Toggle */}
             <button
               className="text-white hover:text-green-100 p-2 rounded-full hover:bg-white/10 transition-colors duration-300"
@@ -179,7 +254,7 @@ function Navbar() {
           >
             <div className="flex items-center gap-3">
               <Home size={18} />
-              Home
+              {t("nav.home")}
             </div>
           </a>
           <a
@@ -189,7 +264,7 @@ function Navbar() {
           >
             <div className="flex items-center gap-3">
               <Share2 size={18} />
-              Shared Portal
+              {t("nav.sharedPortal")}
             </div>
           </a>
           <a
@@ -199,7 +274,7 @@ function Navbar() {
           >
             <div className="flex items-center gap-3">
               <Users size={18} />
-              Our Team
+              {t("nav.ourTeam")}
             </div>
           </a>
           <a
@@ -209,7 +284,7 @@ function Navbar() {
           >
             <div className="flex items-center gap-3">
               <Activity size={18} />
-              Activities
+              {t("nav.activities")}
             </div>
           </a>
           <Link
@@ -218,7 +293,7 @@ function Navbar() {
           >
             <div className="flex items-center gap-3">
               <Video size={18} />
-              Commercial
+              {t("nav.commercial")}
             </div>
           </Link>
         </div>

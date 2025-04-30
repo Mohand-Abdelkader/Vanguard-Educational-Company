@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
 import { getService } from "../../services/projectServiceApi";
+import { useTranslation } from "react-i18next";
 
 function ProjectService() {
   const [projectService, setProjectService] = useState([]);
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -22,11 +25,12 @@ function ProjectService() {
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-5xl font-bold text-primary mb-4">Our Services</h2>
+          <h2 className="text-5xl font-bold text-primary mb-4">
+            {t("services.title")}
+          </h2>
           <div className="w-24 h-1 bg-secondary mx-auto"></div>
           <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            We provide innovative solutions to help your business thrive in
-            today's competitive marketplace.
+            {t("services.description")}
           </p>
         </div>
 
@@ -34,10 +38,10 @@ function ProjectService() {
           {projectService.map((service) => (
             <ServiceCard
               key={service.id}
-              title={service.title.en}
+              title={service.title[lang]}
               icon={service.icon}
-              description={service.description.en}
-              info={service.info.en}
+              description={service.description[lang]}
+              info={service.info[lang]}
             />
           ))}
         </div>
@@ -57,7 +61,7 @@ function ProjectService() {
               }
             }}
           >
-            Get Started with Our Services
+            {t("services.getStarted")}
           </a>
         </div>
       </div>

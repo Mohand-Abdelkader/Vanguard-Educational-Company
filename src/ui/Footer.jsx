@@ -5,30 +5,33 @@ import {
   Linkedin,
   Copyright,
 } from "lucide-react";
-
+import { useTranslation } from "react-i18next";
 function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="bg-primary text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h4 className="font-bold text-lg">Company Name</h4>
+            <h4 className="font-bold text-lg">{t("hero.title")}</h4>
             <p className="text-gray-200 text-sm">
-              Creating innovative solutions for a better tomorrow.
+              {t("hero.subtitle")}
+              <br />
+              {t("hero.subtitlePart2")}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-bold text-lg">Quick Links</h4>
+            <h4 className="font-bold text-lg">{t("footer.quickLinks")}</h4>
             <ul className="space-y-2 text-gray-200">
               <li>
                 <a
                   href="#about"
                   className="hover:text-secondary transition-colors"
                 >
-                  About Us
+                  {t("footer.aboutUs")}
                 </a>
               </li>
               <li>
@@ -36,7 +39,7 @@ function Footer() {
                   href="#services"
                   className="hover:text-secondary transition-colors"
                 >
-                  Services
+                  {t("footer.services")}
                 </a>
               </li>
               <li>
@@ -44,7 +47,7 @@ function Footer() {
                   href="#activities"
                   className="hover:text-secondary transition-colors"
                 >
-                  Activities
+                  {t("footer.activities")}
                 </a>
               </li>
               <li>
@@ -52,7 +55,7 @@ function Footer() {
                   href="#contact"
                   className="hover:text-secondary transition-colors"
                 >
-                  Contact
+                  {t("footer.contact")}
                 </a>
               </li>
             </ul>
@@ -60,14 +63,17 @@ function Footer() {
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="font-bold text-lg">Services</h4>
+            <h4 className="font-bold text-lg">
+              {" "}
+              {t("footer.servicesSection")}
+            </h4>
             <ul className="space-y-2 text-gray-200">
               <li>
                 <a
                   href="#portal"
                   className="hover:text-secondary transition-colors"
                 >
-                  Shared Portal
+                  {t("footer.sharedPortal")}
                 </a>
               </li>
               <li>
@@ -75,7 +81,7 @@ function Footer() {
                   href="#commercial"
                   className="hover:text-secondary transition-colors"
                 >
-                  Commercial Videos
+                  {t("footer.commercialVideos")}
                 </a>
               </li>
               <li>
@@ -83,7 +89,7 @@ function Footer() {
                   href="#team"
                   className="hover:text-secondary transition-colors"
                 >
-                  Our Team
+                  {t("footer.ourTeam")}
                 </a>
               </li>
             </ul>
@@ -91,7 +97,7 @@ function Footer() {
 
           {/* Social Links */}
           <div className="space-y-4">
-            <h4 className="font-bold text-lg">Follow Us</h4>
+            <h4 className="font-bold text-lg"> {t("footer.followUs")}</h4>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-secondary transition-colors">
                 <Facebook className="h-5 w-5" />
@@ -111,7 +117,10 @@ function Footer() {
 
         <div className="border-t border-primary-dark mt-8 pt-8 flex items-center justify-center text-sm text-gray-200">
           <Copyright className="h-4 w-4 mr-2" />
-          <p>{new Date().getFullYear()} Company Name. All rights reserved.</p>
+          <p>
+            {new Date().getFullYear()} {t("hero.title")}.{" "}
+            {t("footer.copyright")}.
+          </p>
         </div>
       </div>
     </footer>

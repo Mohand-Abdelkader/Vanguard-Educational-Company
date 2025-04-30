@@ -1,7 +1,8 @@
 import { getLogos } from "../../services/logoApi";
 import { useEffect, useState } from "react";
-
+import { useTranslation } from "react-i18next";
 const AnimatedLogoCloud = () => {
+  const { t } = useTranslation();
   const [logos, setLogos] = useState([]);
   useEffect(() => {
     const fetchLogos = async () => {
@@ -20,11 +21,13 @@ const AnimatedLogoCloud = () => {
       <div className="flex flex-col items-center mb-12">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
-          <h2 className="text-3xl font-bold text-primary">Our Partners</h2>
+          <h2 className="text-3xl font-bold text-primary">
+            {t("logos.title")}
+          </h2>
           <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
         </div>
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl text-center">
-          We're proud to collaborate with these amazing organizations.
+          {t("logos.description")}
         </p>
       </div>
 
