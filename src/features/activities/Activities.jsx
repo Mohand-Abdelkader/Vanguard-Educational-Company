@@ -1,43 +1,23 @@
+import { getActivities } from "../../services/activitesApi";
 import ActivityCard from "./ActivityCard";
-import { useState } from "react";
-
-const projectActivities = [
-  {
-    icon: "Microscope",
-    title: "Outdoor STEAM Program",
-    description:
-      "Our STEAM program fosters innovation and critical thinking by integrating Science, Technology, Engineering, Arts, and Mathematics. Hands-on projects prepare students to excel in an evolving world.",
-  },
-  {
-    icon: "Bot",
-    title: "Programming & AI - Robotics",
-    description:
-      "Students master programming to develop AI technologies, creating intelligent systems that learn and adapt. This foundation supports innovation in a technology-driven world.",
-  },
-  {
-    icon: "Calculator",
-    title: "Mental Math",
-    description:
-      "The Mental Math program enhances arithmetic skills through mental calculation exercises, improving numerical fluency and cognitive flexibility without relying on calculators.",
-  },
-  {
-    icon: "School",
-    title: "Academic Advisor Program",
-    description:
-      "Our Academic Advisors guide students in navigating educational paths, setting academic goals, and making informed decisions to ensure they reach their full potential.",
-  },
-  {
-    icon: "Binoculars",
-    title: "Scout Number Program",
-    description:
-      "The Scout Number program promotes practical problem-solving and analytical skills, enabling students to make data-driven decisions in real-world scenarios.",
-  },
-];
+import { useState, useEffect } from "react";
 
 function Activities() {
-  const activities = projectActivities;
+  const [activities, setActivities] = useState([]);
   const [visibleItems, setVisibleItems] = useState(4);
 
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        const activitiesData = await getActivities();
+        setActivities(activitiesData);
+      } catch (error) {
+        console.error("Error fetching activities:", error);
+      }
+    };
+
+    fetchActivities();
+  }, []);
   const showMore = () => {
     setVisibleItems(activities.length);
   };
@@ -61,10 +41,10 @@ function Activities() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         {activities.slice(0, visibleItems).map((activity) => (
           <ActivityCard
-            key={activity.title}
+            key={activity.id}
             icon={activity.icon}
-            title={activity.title}
-            description={activity.description}
+            title={activity.title.en}
+            description={activity.description.en}
             color={"#509951"}
           />
         ))}
