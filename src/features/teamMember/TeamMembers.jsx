@@ -1,58 +1,24 @@
 import Member from "./Member";
-
-const Members = [
-  {
-    name: "Mohamed Rashed",
-    title: "Director/CEO",
-    image:
-      "https://vanguardeducationcompany.com/assets/images/mohamed_rash.jpg",
-  },
-  {
-    name: "Mohamed Abdulmaqsod",
-    title: null,
-    image:
-      "https://vanguardeducationcompany.com/assets/images/abdulmaqsud.jpeg",
-  },
-  {
-    name: "Muhammad El-Hofy",
-    title: null,
-    image: "https://vanguardeducationcompany.com/assets/images/elhofy.jpeg",
-  },
-  {
-    name: "Amro Ahmad",
-    title: null,
-    image: "https://vanguardeducationcompany.com/assets/images/amro.jpeg",
-  },
-  {
-    name: "Muhammad Manga Muhammad",
-    title: null,
-    image:
-      "https://vanguardeducationcompany.com/assets/images/mohammad_ramadan.jpeg",
-  },
-  {
-    name: "Muaz Abdulqadir Ibrahim",
-    title: null,
-    image: "https://vanguardeducationcompany.com/assets/images/abdulkadir.jpeg",
-  },
-  {
-    name: "Wafaa Mohamed",
-    title: null,
-    image: "https://vanguardeducationcompany.com/assets/images/wafaa.jpeg",
-  },
-  {
-    name: "Muhammed Woliyat",
-    title: null,
-    image: "https://vanguardeducationcompany.com/assets/images/wal-moh.jpeg",
-  },
-  {
-    name: "Mariam Mahmoud",
-    title: null,
-    image: "https://vanguardeducationcompany.com/assets/images/mariam.jpeg",
-  },
-];
+import { getMembers } from "../../services/memberApi";
+import { useState, useEffect } from "react";
 
 function TeamMember() {
-  const teamMembers = Members;
+  const [teamMembers, setTeamMembers] = useState([]);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const members = await getMembers();
+        console.log("Fetched members:", members);
+        setTeamMembers(members);
+      } catch (error) {
+        console.error("Error fetching team members:", error);
+      }
+    };
+
+    fetchMembers();
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3 mb-4">
@@ -68,9 +34,9 @@ function TeamMember() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map((member) => (
           <Member
-            key={member.name}
-            name={member.name}
-            title={member.title}
+            key={member.id}
+            name={member.name.en}
+            title={member.title.en}
             image={member.image}
           />
         ))}

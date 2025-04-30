@@ -98,7 +98,6 @@ function Navbar() {
                 to="/"
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
-                <a href="#home"></a>
                 <Home size={18} />
                 Home
               </Link>
