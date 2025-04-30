@@ -1,51 +1,20 @@
-// Instructions for integrating continuous logo animation in Tailwind CSS:
-// Add the following configurations to the `extend` section of your `tailwind.config.js`:
-// 1. Keyframes for 'logo-cloud' animation that continuously moves logos from right to left:
-//    keyframes: {
-//      'logo-cloud': {
-//        from: { transform: 'translateX(0)' },
-//        to: { transform: 'translateX(calc(-100% - 4rem))' },
-//      },
-//    }
-// 2. Animation utility to apply this keyframe:
-//    animation: {
-//      'logo-cloud': 'logo-cloud 30s linear infinite', // Adjust duration and timing as needed for your design.
-//    }
-
-const logos = [
-  {
-    name: "Vanguard",
-    url: "https://vanguardeducationcompany.com/assets/images/partners/flis.jpeg",
-    link: "https://www.google.com/",
-  },
-  {
-    name: "Mis",
-    url: "https://vanguardeducationcompany.com/assets/images/partners/mis.jpeg",
-    link: "https://www.google.com/",
-  },
-  {
-    name: "array",
-    url: "https://vanguardeducationcompany.com/assets/images/partners/array.jpeg",
-    link: "https://www.google.com/",
-  },
-  {
-    name: "alfaq",
-    url: "https://vanguardeducationcompany.com/assets/images/partners/alfaq.jpeg",
-    link: "https://www.google.com/",
-  },
-  {
-    name: "manarat",
-    url: "https://vanguardeducationcompany.com/assets/images/partners/manarat.jpeg",
-    link: "https://www.google.com/",
-  },
-  {
-    name: "aou",
-    url: "https://vanguardeducationcompany.com/assets/images/partners/aou.jpeg",
-    link: "https://www.google.com/",
-  },
-];
+import { getLogos } from "../../services/logoApi";
+import { useEffect, useState } from "react";
 
 const AnimatedLogoCloud = () => {
+  const [logos, setLogos] = useState([]);
+  useEffect(() => {
+    const fetchLogos = async () => {
+      try {
+        const logosData = await getLogos();
+        setLogos(logosData);
+      } catch (error) {
+        console.error("Error fetching logos:", error);
+      }
+    };
+
+    fetchLogos();
+  }, []);
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center mb-12">
@@ -71,7 +40,7 @@ const AnimatedLogoCloud = () => {
             }}
           >
             {/* Create two copies of the logo set for seamless looping */}
-            {[1, 2].map((setIndex) => (
+            {[1, 2, 3, 4, 5].map((setIndex) => (
               <div
                 key={`logo-set-${setIndex}`}
                 className="flex shrink-0 animate-logo-cloud flex-row justify-around gap-8"
