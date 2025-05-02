@@ -1,29 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Search } from "lucide-react";
-import { getBlogs } from "../../services/blogsApi";
 import BlogCart from "./BlogCart";
+import { useBlogs } from "../../hooks/blogCustomHooks/useBlogs";
+import Loader from "../../ui/Loader";
 
 function BlogPage() {
   const { t, i18n } = useTranslation();
-  const [blogs, setBlogs] = useState([]);
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const lang = i18n.language;
 
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const blogsData = await getBlogs();
-        setBlogs(blogsData);
-      } catch (error) {
-        console.error("error fetching blogs", error);
-      }
-    };
-    fetchBlogs();
-  }, []);
-
+  const { blogs, isLoading } = useBlogs();
   // Filter blogs based on search term and category
+  if (isLoading) return <Loader size="large" />;
   const filteredBlogs = blogs.filter((blog) => {
     const matchesSearch =
       blog.title[lang].toLowerCase().includes(searchTerm.toLowerCase()) ||

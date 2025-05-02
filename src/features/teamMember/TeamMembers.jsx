@@ -1,25 +1,14 @@
 import Member from "./Member";
-import { getMembers } from "../../services/memberApi";
-import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useMembers } from "../../hooks/teamMemberCustomHook/useMembers";
+import Loader from "../../ui/Loader";
 
 function TeamMember() {
-  const [teamMembers, setTeamMembers] = useState([]);
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const members = await getMembers();
-        setTeamMembers(members);
-      } catch (error) {
-        console.error("Error fetching team members:", error);
-      }
-    };
-
-    fetchMembers();
-  }, []);
+  const { teamMembers, isLoading } = useMembers();
+  if (isLoading) return <Loader />;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

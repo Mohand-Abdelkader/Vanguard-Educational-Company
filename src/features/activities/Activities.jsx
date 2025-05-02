@@ -1,30 +1,20 @@
-import { getActivities } from "../../services/activitesApi";
+import { useActivities } from "../../hooks/activitesCustomHooks/useActivities";
+
 import ActivityCard from "./ActivityCard";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Loader from "../../ui/Loader";
 
 function Activities() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
-  const [activities, setActivities] = useState([]);
   const [visibleItems, setVisibleItems] = useState(4);
 
-  useEffect(() => {
-    const fetchActivities = async () => {
-      try {
-        const activitiesData = await getActivities();
-        setActivities(activitiesData);
-      } catch (error) {
-        console.error("Error fetching activities:", error);
-      }
-    };
-
-    fetchActivities();
-  }, []);
+  const { activities, isLoading } = useActivities();
   const showMore = () => {
     setVisibleItems(activities.length);
   };
-
+  if (isLoading) return <Loader />;
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center mb-12">

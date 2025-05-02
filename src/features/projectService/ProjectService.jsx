@@ -1,25 +1,15 @@
-import { useEffect, useState } from "react";
 import ServiceCard from "./ServiceCard";
-import { getService } from "../../services/projectServiceApi";
+
 import { useTranslation } from "react-i18next";
+import { useService } from "../../hooks/projectServiceCustomHooks/useService";
+import Loader from "../../ui/Loader";
 
 function ProjectService() {
-  const [projectService, setProjectService] = useState([]);
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const services = await getService();
-        setProjectService(services);
-      } catch (error) {
-        console.error("Error fetching project services:", error);
-      }
-    };
-
-    fetchServices();
-  }, []);
+  const { projectService, isLoading } = useService();
+  if (isLoading) return <Loader />;
 
   return (
     <>

@@ -1,21 +1,11 @@
-import { getLogos } from "../../services/logoApi";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLogos } from "../../hooks/logosCustomHooks/useLogos";
+import Loader from "../../ui/Loader";
 const AnimatedLogoCloud = () => {
   const { t } = useTranslation();
-  const [logos, setLogos] = useState([]);
-  useEffect(() => {
-    const fetchLogos = async () => {
-      try {
-        const logosData = await getLogos();
-        setLogos(logosData);
-      } catch (error) {
-        console.error("Error fetching logos:", error);
-      }
-    };
+  const { logos, isLoading } = useLogos();
 
-    fetchLogos();
-  }, []);
+  if (isLoading) return <Loader />;
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center mb-12">

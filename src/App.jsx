@@ -6,19 +6,28 @@ import NotFound from "./ui/NotFound";
 import CommercialVideos from "./features/videos/CommercialVideos";
 import Blog from "./features/blogs/Blog";
 import BlogPage from "./features/blogs/BlogPage";
+import { QueryClient } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient({
+  defaultOptions: {
+    staleTime: 0,
+  },
+});
 function App() {
   return (
-    <HashRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<AppLayout />} />
-        <Route path="/commercial" element={<CommercialVideos />} />
-        <Route path="/blogs" element={<Blog />} />
-        <Route path="/blogs/:title" element={<BlogPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </HashRouter>
+    <QueryClientProvider client={queryClient}>
+      <HashRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<AppLayout />} />
+          <Route path="/commercial" element={<CommercialVideos />} />
+          <Route path="/blogs" element={<Blog />} />
+          <Route path="/blogs/:title" element={<BlogPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </HashRouter>
+    </QueryClientProvider>
   );
 }
 
