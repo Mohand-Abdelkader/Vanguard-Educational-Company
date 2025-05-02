@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.png";
-import Button from "./Button";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
