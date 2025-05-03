@@ -19,6 +19,7 @@ import AdminRequests from "./features/requests/AdminRequests";
 
 import { Toaster } from "react-hot-toast";
 import { Toaster as Sonner } from "sonner";
+import RequestFrom from "./features/requests/RequestFrom";
 const queryClient = new QueryClient({
   defaultOptions: {
     staleTime: 0,
@@ -49,6 +50,7 @@ function App() {
             <Route path="commercial" element={<CommercialVideos />} />
             <Route path="blogs" element={<Blog />} />
             <Route path="blogs/:title" element={<BlogPage />} />
+            <Route path="Request" element={<RequestFrom />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

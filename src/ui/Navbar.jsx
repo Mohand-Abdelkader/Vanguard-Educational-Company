@@ -13,6 +13,8 @@ import {
   Globe,
   ChevronDown,
   Pen,
+  Shield,
+  Pointer,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logo.png";
@@ -105,38 +107,14 @@ function Navbar() {
 
             {/* Desktop Navigation Links */}
             <div className="hidden md:ml-6 md:flex md:space-x-4">
-              <a
-                href="#home"
-                onClick={(e) => handleScroll(e, "home")}
+              <Link
+                to="/"
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
                 <Home size={18} />
                 {t("nav.home")}
-              </a>
-              <a
-                href="#portal"
-                onClick={(e) => handleScroll(e, "portal")}
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
-              >
-                <Share2 size={18} />
-                {t("nav.sharedPortal")}
-              </a>
-              <a
-                href="#team"
-                onClick={(e) => handleScroll(e, "team")}
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
-              >
-                <Users size={18} />
-                {t("nav.ourTeam")}
-              </a>
-              <a
-                href="#activities"
-                onClick={(e) => handleScroll(e, "activities")}
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
-              >
-                <Activity size={18} />
-                {t("nav.activities")}
-              </a>
+              </Link>
+
               <Link
                 to="/commercial"
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
@@ -149,7 +127,21 @@ function Navbar() {
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
                 <Pen size={18} />
-                blogs
+                Blogs
+              </Link>
+              <Link
+                to="/request"
+                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
+              >
+                <Pointer size={18} />
+                Join our Team
+              </Link>
+              <Link
+                to="/admin"
+                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
+              >
+                <Shield size={18} />
+                Admin
               </Link>
             </div>
           </div>

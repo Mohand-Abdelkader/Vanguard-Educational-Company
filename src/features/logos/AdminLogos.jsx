@@ -9,7 +9,7 @@ function AdminLogos() {
   const [isOpen, setIsOpen] = useState(false);
   const [editLogo, setEditLogo] = useState(null);
   const { logos, isLoading } = useLogos();
-  console.log(editLogo);
+
   function toggleForm() {
     setIsOpen((i) => !i);
     setEditLogo(null);

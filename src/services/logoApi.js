@@ -48,8 +48,6 @@ export async function addLogo(logo) {
   }
 }
 export async function updateLogo(logoId, logo) {
-  console.log(logoId);
-  console.log(logo);
   try {
     const response = await fetch(`${FIREBASE_URL}/logos/${logoId}.json`, {
       method: "PATCH", // Using PATCH instead of PUT to update only the provided fields
