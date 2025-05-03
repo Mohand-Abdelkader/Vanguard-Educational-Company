@@ -5,7 +5,6 @@ import BlogItem from "./BlogItem";
 import Loader from "../../ui/Loader";
 function AdminBlogs() {
   const { blogs, isLoading } = useBlogs();
-  console.log(blogs);
 
   if (isLoading) return <Loader />;
   return (

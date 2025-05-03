@@ -22,7 +22,7 @@ function AdminSidebar() {
   ];
 
   return (
-    <aside className="w-64 border-r border-gray-200 dark:border-gray-700 h-screen flex flex-col bg-white dark:bg-gray-800">
+    <aside className="w-64 border-r border-gray-200 dark:border-gray-700 h-100 flex flex-col bg-white dark:bg-gray-800">
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center space-x-2">
           <div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center text-white font-bold shadow-lg">
