@@ -5,7 +5,7 @@ import List from "../../ui/List";
 import ActivityItem from "./ActivityItme";
 function AdminActivities() {
   const { activities, isLoading } = useActivities();
-  console.log(activities);
+
   if (isLoading) return <Loader />;
   return (
     <div className="p-6">

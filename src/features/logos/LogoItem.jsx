@@ -1,10 +1,20 @@
 import { Edit, Trash2, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { useDeleteLogo } from "../../hooks/logosCustomHooks/useDeleteLogo";
+import { toast as sonner } from "sonner";
 
 function LogoItem({ logo }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
-
+  const { deleteLogo } = useDeleteLogo();
+  const handleDelete = () => {
+    sonner("Are you sure you want to delete?", {
+      action: {
+        label: "Delete",
+        onClick: () => deleteLogo(logo.id),
+      },
+    });
+  };
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
@@ -60,6 +70,7 @@ function LogoItem({ logo }) {
               <Edit size={18} />
             </button>
             <button
+              onClick={handleDelete}
               className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
               title="Delete member"
             >
@@ -92,6 +103,7 @@ function LogoItem({ logo }) {
                   <button
                     className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                     role="menuitem"
+                    onClick={handleDelete}
                   >
                     <Trash2 size={16} className="mr-2 text-red-500" />
                     Delete
