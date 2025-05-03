@@ -1,27 +1,63 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useCreateLogo } from "../../hooks/logosCustomHooks/useCreateLogo";
+import { useUpdateLogo } from "../../hooks/logosCustomHooks/useUpdateLogo";
 
-function LogoForm({ setIsOpen }) {
-  const { register, handleSubmit, reset } = useForm();
-  const { createLogo, isCreating, error } = useCreateLogo();
+function LogoForm({ setIsOpen, editLogo }) {
+  const isEditSession = !!editLogo;
+
+  const { register, handleSubmit, reset, setValue } = useForm({
+    defaultValues: {
+      name: "",
+      link: "",
+      url: "",
+    },
+  });
+
+  const { createLogo, isCreating, error: createError } = useCreateLogo();
+  const { updateLogo, isUpdating, error: updateError } = useUpdateLogo();
+
+  // Pre-fill form when editing
+  useEffect(() => {
+    if (editLogo) {
+      setValue("name", editLogo.name);
+      setValue("link", editLogo.link);
+      setValue("url", editLogo.url);
+    }
+  }, [editLogo, setValue]);
 
   const onSubmit = (data) => {
-    console.log(data);
-    createLogo(data, {
-      onSuccess: () => {
-        reset(); // Clear the form after success
-        setIsOpen(false);
-      },
-    });
+    if (isEditSession) {
+      console.log(data);
+      updateLogo(
+        { id: editLogo.id, newData: data },
+        {
+          onSuccess: () => {
+            reset();
+            setIsOpen(false);
+          },
+        }
+      );
+    } else {
+      createLogo(data, {
+        onSuccess: () => {
+          reset();
+          setIsOpen(false);
+        },
+      });
+    }
   };
+
+  const isLoading = isCreating || isUpdating;
+  const error = createError || updateError;
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 max-w-md mx-auto"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 max-w-md mx-auto mb-4"
     >
       <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6 border-b pb-3 dark:border-gray-700">
-        Add New Partner
+        {isEditSession ? "Edit Partner" : "Add New Partner"}
       </h2>
 
       <div className="space-y-5">
@@ -69,10 +105,10 @@ function LogoForm({ setIsOpen }) {
 
         <button
           type="submit"
-          disabled={isCreating}
+          disabled={isLoading}
           className="w-full mt-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white font-medium rounded-md shadow-sm transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center"
         >
-          {isCreating ? (
+          {isLoading ? (
             <span className="flex items-center">
               <svg
                 className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
@@ -94,8 +130,10 @@ function LogoForm({ setIsOpen }) {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-              Creating...
+              {isEditSession ? "Updating..." : "Creating..."}
             </span>
+          ) : isEditSession ? (
+            "Update Partner"
           ) : (
             "Create Partner"
           )}
