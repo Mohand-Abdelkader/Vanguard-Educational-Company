@@ -73,18 +73,6 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleScroll = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-    setIsOpen(false);
-  };
-
   return (
     <nav
       className={`fixed w-full top-0 z-50 ${
@@ -246,46 +234,16 @@ function Navbar() {
         } bg-primary/95 dark:bg-accent/95 backdrop-blur-sm shadow-lg`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <a
-            href="#home"
-            onClick={(e) => handleScroll(e, "home")}
+          <Link
+            to="/"
             className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
           >
             <div className="flex items-center gap-3">
               <Home size={18} />
               {t("nav.home")}
             </div>
-          </a>
-          <a
-            href="#portal"
-            onClick={(e) => handleScroll(e, "portal")}
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
-          >
-            <div className="flex items-center gap-3">
-              <Share2 size={18} />
-              {t("nav.sharedPortal")}
-            </div>
-          </a>
-          <a
-            href="#team"
-            onClick={(e) => handleScroll(e, "team")}
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
-          >
-            <div className="flex items-center gap-3">
-              <Users size={18} />
-              {t("nav.ourTeam")}
-            </div>
-          </a>
-          <a
-            href="#activities"
-            onClick={(e) => handleScroll(e, "activities")}
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
-          >
-            <div className="flex items-center gap-3">
-              <Activity size={18} />
-              {t("nav.activities")}
-            </div>
-          </a>
+          </Link>
+
           <Link
             to="/commercial"
             className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
@@ -293,6 +251,36 @@ function Navbar() {
             <div className="flex items-center gap-3">
               <Video size={18} />
               {t("nav.commercial")}
+            </div>
+          </Link>
+
+          <Link
+            to="/blogs"
+            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+          >
+            <div className="flex items-center gap-3">
+              <Pen size={18} />
+              Blogs
+            </div>
+          </Link>
+
+          <Link
+            to="/request"
+            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+          >
+            <div className="flex items-center gap-3">
+              <Pointer size={18} />
+              Join our Team
+            </div>
+          </Link>
+
+          <Link
+            to="/admin"
+            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+          >
+            <div className="flex items-center gap-3">
+              <Shield size={18} />
+              Admin
             </div>
           </Link>
         </div>
