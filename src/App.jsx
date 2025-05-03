@@ -7,15 +7,15 @@ import BlogPage from "./features/blogs/BlogPage";
 import { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import AdminLayout from "./features/admin/AdminLayout";
-import AdminService from "./features/admin/AdminService";
 import MainLayout from "./ui/MainLayout";
 
 import Dashboard from "./features/admin/Dashboard";
-import AdminTeam from "./features/admin/AdminTeam";
-import AdminActivities from "./features/admin/AdminActivities";
-import AdminBlogs from "./features/admin/AdminBlogs";
-import AdminLogos from "./features/admin/AdminLogos";
-import AdminRequests from "./features/admin/AdminRequests";
+import AdminService from "./features/projectService/AdminService";
+import AdminTeam from "./features/teamMember/AdminTeam";
+import AdminActivities from "./features/activities/AdminActivities";
+import AdminBlogs from "./features/blogs/AdminBlogs";
+import AdminLogos from "./features/logos/AdminLogos";
+import AdminRequests from "./features/requests/AdminRequests";
 
 const queryClient = new QueryClient({
   defaultOptions: {
