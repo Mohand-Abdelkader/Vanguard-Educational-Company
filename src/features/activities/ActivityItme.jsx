@@ -1,7 +1,7 @@
 import { Edit, Trash2, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
-function MemberItem({ member }) {
+function ActivityItem({ activity }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -22,19 +22,9 @@ function MemberItem({ member }) {
     <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center">
-          <div className="flex-shrink-0 h-10 w-10">
-            <img
-              className="h-10 w-10 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
-              src={member.image}
-              alt={`${member.name.en}'s profile`}
-              onError={(e) => {
-                e.target.src = "https://via.placeholder.com/40?text=NA";
-              }}
-            />
-          </div>
           <div className="ml-4">
             <div className="text-sm font-medium text-gray-900 dark:text-white">
-              {member.name.en}
+              {activity.title.en}
             </div>
           </div>
         </div>
@@ -42,15 +32,15 @@ function MemberItem({ member }) {
 
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-900 dark:text-gray-200">
-          {member.title.en}
+          {activity.title.ar}
         </div>
       </td>
 
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
+      {/* <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
         <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-          {member.address.en}
+          {activity.icon}
         </span>
-      </td>
+      </td> */}
 
       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <div className="relative inline-block text-left" ref={dropdownRef}>
@@ -109,4 +99,4 @@ function MemberItem({ member }) {
   );
 }
 
-export default MemberItem;
+export default ActivityItem;

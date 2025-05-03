@@ -1,9 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Users, Activity, FileText, Image, MessageSquare } from "lucide-react";
+import {
+  Home,
+  Users,
+  Activity,
+  FileText,
+  Image,
+  MessageSquare,
+} from "lucide-react";
 
 function AdminSidebar() {
   const location = useLocation();
-  
+
   // Navigation items
   const navItems = [
     { name: "Dashboard", icon: Home, path: "/admin" },
@@ -24,7 +31,7 @@ function AdminSidebar() {
           <h3 className="text-lg font-semibold dark:text-white">Admin Panel</h3>
         </div>
       </div>
-      
+
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1 px-2">
           {navItems.map((item) => (
@@ -44,10 +51,12 @@ function AdminSidebar() {
           ))}
         </ul>
       </nav>
-      
+
       <footer className="p-4 border-t border-gray-200 dark:border-gray-700 mt-auto">
         <div className="flex items-center justify-between">
-          <p className="text-xs text-gray-500 dark:text-gray-400">Admin Dashboard v1.0</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Admin Dashboard v1.0
+          </p>
         </div>
       </footer>
     </aside>

@@ -18,12 +18,14 @@ function List({ items, render, firstCol, secondCol, thirdCol }) {
                 >
                   {secondCol}
                 </th>
-                <th
-                  scope="col"
-                  className="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-                >
-                  {thirdCol}
-                </th>
+                {thirdCol && (
+                  <th
+                    scope="col"
+                    className="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    {thirdCol}
+                  </th>
+                )}
                 <th
                   scope="col"
                   className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
