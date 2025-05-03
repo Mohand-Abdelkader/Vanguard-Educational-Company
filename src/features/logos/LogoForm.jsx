@@ -28,7 +28,6 @@ function LogoForm({ setIsOpen, editLogo }) {
 
   const onSubmit = (data) => {
     if (isEditSession) {
-      console.log(data);
       updateLogo(
         { id: editLogo.id, newData: data },
         {
