@@ -9,13 +9,6 @@ function BlogDetails() {
   const blog = location.state;
   const lang = i18n.language;
 
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(
-      i18n.language === "ar" ? "ar-SA" : "en-US",
-      options
-    );
-  };
   return (
     <div className="pt-24 pb-16 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,7 +30,7 @@ function BlogDetails() {
           <div className="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-300 mb-8">
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              <span>{formatDate(blog.date)}</span>
+              <span>{blog.date}</span>
             </div>
 
             <div className="flex items-center gap-2">

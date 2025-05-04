@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 function BlogCart({ blog }) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(
-      i18n.language === "ar" ? "ar-SA" : "en-US",
-      options
-    );
-  };
+
   return (
     <article
       key={blog.id}
@@ -33,7 +27,7 @@ function BlogCart({ blog }) {
         <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-3">
           <div className="flex items-center gap-1">
             <Calendar className="h-4 w-4" />
-            <span>{formatDate(blog.date)}</span>
+            <span>{blog.date}</span>
           </div>
         </div>
 
