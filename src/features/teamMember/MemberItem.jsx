@@ -1,7 +1,18 @@
 import { Edit, Trash2, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-
+import { toast as sonner } from "sonner";
+import { useDeleteMember } from "../../hooks/teamMemberCustomHook/useDeleteMember";
 function MemberItem({ member }) {
+  const { deleteMember } = useDeleteMember();
+
+  const handleDelete = () => {
+    sonner("Are you sure you want to delete?", {
+      action: {
+        label: "Delete",
+        onClick: () => deleteMember(member.id),
+      },
+    });
+  };
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -63,6 +74,7 @@ function MemberItem({ member }) {
               <Edit size={18} />
             </button>
             <button
+              onClick={handleDelete}
               className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
               title="Delete member"
             >
