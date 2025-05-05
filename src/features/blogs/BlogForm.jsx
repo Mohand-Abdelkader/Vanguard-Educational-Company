@@ -198,7 +198,7 @@ function BlogForm({ setIsOpen, editBlog }) {
             <div className="mb-3 p-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800/50">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-500 dark:text-gray-400 mb-1">
-                  Current logo:
+                  Current Blog image:
                 </span>
                 <span className="text-xs text-blue-500 dark:text-blue-400">
                   Change below
@@ -207,7 +207,7 @@ function BlogForm({ setIsOpen, editBlog }) {
               <div className="flex justify-center p-3 bg-white dark:bg-gray-700 rounded border border-gray-100 dark:border-gray-600">
                 <img
                   src={editBlog?.image}
-                  alt={editBlog?.title || "Partner logo"}
+                  alt={editBlog?.title || "Blog Image"}
                   className="h-20 object-contain rounded shadow-sm"
                 />
               </div>
