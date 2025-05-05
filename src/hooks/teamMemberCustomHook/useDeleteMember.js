@@ -8,7 +8,7 @@ export function useDeleteMember() {
     mutationFn: (memberId) => deleteMemberApi(memberId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["members"] });
-      toast.success("Blog deleted successfully");
+      toast.success("Member deleted successfully");
     },
     onError: (error) => {
       toast.error(error.message);

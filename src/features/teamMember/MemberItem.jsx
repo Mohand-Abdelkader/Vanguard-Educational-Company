@@ -2,7 +2,7 @@ import { Edit, Trash2, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { toast as sonner } from "sonner";
 import { useDeleteMember } from "../../hooks/teamMemberCustomHook/useDeleteMember";
-function MemberItem({ member }) {
+function MemberItem({ member, openEditForm }) {
   const { deleteMember } = useDeleteMember();
 
   const handleDelete = () => {
@@ -68,6 +68,7 @@ function MemberItem({ member }) {
           {/* Desktop view - show buttons */}
           <div className="hidden md:flex space-x-2">
             <button
+              onClick={() => openEditForm(member)}
               className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
               title="Edit member"
             >

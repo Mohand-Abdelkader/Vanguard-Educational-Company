@@ -2,24 +2,26 @@ import { useForm } from "react-hook-form";
 import InputEnAr from "../../ui/InputEnAr";
 import { uploadFileToCloudinary } from "../../utils/helper";
 import { useState, useEffect } from "react";
+import { useUpdataMember } from "../../hooks/teamMemberCustomHook/useUpdataMember";
 import { useCreateMember } from "../../hooks/teamMemberCustomHook/useCreateMember";
 function MemberForm({ setIsOpen, editMember }) {
   const isEditingSession = Boolean(editMember);
+  console.log(editMember);
   const [uploadingPhoto, isUploadingPhoto] = useState(false);
   const [enExperiences, setEnExperiences] = useState([""]);
   const [arExperiences, setArExperiences] = useState([""]);
+  const { updateMember, isUpdating } = useUpdataMember();
   const { isCreating, addMember } = useCreateMember();
   const { register, handleSubmit, reset, setValue } = useForm({
     defaultValues: {
       name: { en: "", ar: "" },
       title: { en: "", ar: "" },
-      subtitle: { en: "", ar: "" },
+      subTitle: { en: "", ar: "" },
       summary: { en: "", ar: "" },
       description: { en: "", ar: "" },
       education: { en: "", ar: "" },
       address: { en: "", ar: "" },
       experiences: { en: [], ar: [] },
-      image: "",
     },
   });
 
@@ -30,8 +32,8 @@ function MemberForm({ setIsOpen, editMember }) {
       setValue("name.en", editMember.name.en);
       setValue("title.ar", editMember.title.ar);
       setValue("title.en", editMember.title.en);
-      setValue("subtitle.ar", editMember.subtitle.ar);
-      setValue("subtitle.en", editMember.subtitle.en);
+      setValue("subTitle.ar", editMember.subTitle?.ar);
+      setValue("subTitle.en", editMember.subTitle?.en);
       setValue("summary.ar", editMember.summary.ar);
       setValue("summary.en", editMember.summary.en);
       setValue("description.ar", editMember.description.ar);
@@ -41,10 +43,16 @@ function MemberForm({ setIsOpen, editMember }) {
       setValue("address.ar", editMember.address.ar);
       setValue("address.en", editMember.address.en);
 
-      if (editMember.experiences?.en?.length) {
+      // Handle experiences - check both possible property names
+      if (editMember.experience?.en?.length) {
+        setEnExperiences(editMember.experience.en);
+      } else if (editMember.experiences?.en?.length) {
         setEnExperiences(editMember.experiences.en);
       }
-      if (editMember.experiences?.ar?.length) {
+
+      if (editMember.experience?.ar?.length) {
+        setArExperiences(editMember.experience.ar);
+      } else if (editMember.experiences?.ar?.length) {
         setArExperiences(editMember.experiences.ar);
       }
     }
@@ -52,10 +60,6 @@ function MemberForm({ setIsOpen, editMember }) {
 
   const onSubmit = async (data) => {
     console.log(data);
-    isUploadingPhoto(true);
-    const url = await uploadFileToCloudinary(data.image[0]);
-    isUploadingPhoto(false);
-    data.image = url;
 
     // Add experiences from state
     data.experiences = {
@@ -63,10 +67,41 @@ function MemberForm({ setIsOpen, editMember }) {
       ar: arExperiences.filter((exp) => exp.trim() !== ""),
     };
 
-    console.log(data);
-    addMember(data);
-    reset();
-    setIsOpen(false);
+    // Also set experience property for backward compatibility
+    data.experience = data.experiences;
+
+    // Handle image upload
+
+    if (isEditingSession) {
+      if (data.img[0]) {
+        const file = data.img[0];
+        isUploadingPhoto(true);
+        const url = await uploadFileToCloudinary(file);
+        isUploadingPhoto(false);
+        data.image = url;
+      }
+      updateMember(
+        { id: editMember.id, newData: data },
+        {
+          onSuccess: () => {
+            reset();
+            setIsOpen(false);
+          },
+        }
+      );
+    } else {
+      const file = data.img[0];
+      isUploadingPhoto(true);
+      const url = await uploadFileToCloudinary(file);
+      isUploadingPhoto(false);
+      data.image = url;
+      addMember(data, {
+        onSuccess: () => {
+          reset();
+          setIsOpen(false);
+        },
+      });
+    }
   };
 
   const handleAddExperience = (language) => {
@@ -101,7 +136,7 @@ function MemberForm({ setIsOpen, editMember }) {
     }
   };
 
-  const isLoading = uploadingPhoto || isCreating;
+  const isLoading = uploadingPhoto || isCreating || isUpdating;
 
   return (
     <form
@@ -141,7 +176,7 @@ function MemberForm({ setIsOpen, editMember }) {
         <InputEnAr
           disabled={isLoading}
           register={register}
-          name="subtitle"
+          name="subTitle"
           isRequired={true}
           englishLabel="Detailed Title (English)"
           englishPlaceHolder="Enter detailed title in English"
@@ -253,29 +288,27 @@ function MemberForm({ setIsOpen, editMember }) {
                 className="w-full px-4 py-2 text-gray-900 placeholder-gray-400 transition-colors bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white dark:placeholder-gray-500"
                 disabled={isLoading}
               />
-              {enExperiences.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => handleRemoveExperience(index, "en")}
-                  className="p-2 text-red-500 hover:text-red-700"
-                  disabled={isLoading}
+              <button
+                type="button"
+                onClick={() => handleRemoveExperience(index, "en")}
+                className="p-2 text-red-500 hover:text-red-700"
+                disabled={isLoading}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    ></path>
-                  </svg>
-                </button>
-              )}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  ></path>
+                </svg>
+              </button>
             </div>
           ))}
           <button
@@ -309,29 +342,27 @@ function MemberForm({ setIsOpen, editMember }) {
                 dir="rtl"
                 disabled={isLoading}
               />
-              {arExperiences.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => handleRemoveExperience(index, "ar")}
-                  className="p-2 text-red-500 hover:text-red-700"
-                  disabled={isLoading}
+              <button
+                type="button"
+                onClick={() => handleRemoveExperience(index, "ar")}
+                className="p-2 text-red-500 hover:text-red-700"
+                disabled={isLoading}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    ></path>
-                  </svg>
-                </button>
-              )}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  ></path>
+                </svg>
+              </button>
             </div>
           ))}
           <button
@@ -370,7 +401,7 @@ function MemberForm({ setIsOpen, editMember }) {
           )}
           <div className="relative">
             <label
-              for="file_input"
+              htmlFor="file_input"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             ></label>
             <input
@@ -378,7 +409,7 @@ function MemberForm({ setIsOpen, editMember }) {
               accept="image/*"
               multiple={false}
               className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-              {...register("image", { required: !isEditingSession })}
+              {...register("img", { required: !isEditingSession })}
             />
           </div>
 
