@@ -8,7 +8,18 @@ import BlogForm from "./BlogForm";
 function AdminBlogs() {
   const { blogs, isLoading } = useBlogs();
   const [isOpen, setIsOpen] = useState(false);
-  console.log(blogs);
+  const [editBlog, setEditBlog] = useState(null);
+
+  function toggleForm() {
+    setIsOpen((i) => !i);
+    setEditBlog(null);
+  }
+
+  function openEditForm(blog) {
+    console.log(blog);
+    setEditBlog(blog);
+    setIsOpen(true);
+  }
   if (isLoading) return <Loader />;
   return (
     <div className="p-6">
@@ -18,7 +29,7 @@ function AdminBlogs() {
         </h1>
 
         <button
-          onClick={() => setIsOpen((i) => !i)}
+          onClick={toggleForm}
           className="flex items-center px-4 py-2 text-white rounded-lg shadow-sm transition-colors bg-primary hover:bg-primary-dark"
         >
           {isOpen ? (
@@ -29,10 +40,12 @@ function AdminBlogs() {
           <span>{isOpen ? "Close Form" : "Add Blogs"}</span>
         </button>
       </div>
-      {isOpen && <BlogForm setIsOpen={setIsOpen} />}
+      {isOpen && <BlogForm setIsOpen={setIsOpen} editBlog={editBlog} />}
       <List
         items={blogs}
-        render={(blog) => <BlogItem blog={blog} key={blog.id} />}
+        render={(blog) => (
+          <BlogItem blog={blog} key={blog.id} openEditForm={openEditForm} />
+        )}
         firstCol="Title in English"
         secondCol="Title in Arabic"
         thirdCol="Category"

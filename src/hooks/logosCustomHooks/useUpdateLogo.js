@@ -6,7 +6,7 @@ export function useUpdateLogo() {
   const { mutate: updateLogo, isLoading: isUpdating } = useMutation({
     mutationFn: ({ id, newData }) => updataLogoApi(id, newData),
     onSuccess: () => {
-      toast.success("new Partner Successful Created ");
+      toast.success("Updated Successfully");
       queryClint.invalidateQueries({ queryKey: ["logos"] });
     },
     onError: (err) => toast.error(err.message),

@@ -2,7 +2,7 @@ import { Edit, Trash2, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useDeleteBlog } from "../../hooks/blogCustomHooks/useDeleteBlog";
 import { toast as sonner } from "sonner";
-function BlogItem({ blog }) {
+function BlogItem({ blog, openEditForm }) {
   const { deleteBlog } = useDeleteBlog();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
@@ -64,6 +64,7 @@ function BlogItem({ blog }) {
           {/* Desktop view - show buttons */}
           <div className="hidden md:flex space-x-2">
             <button
+              onClick={() => openEditForm(blog)}
               className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
               title="Edit member"
             >

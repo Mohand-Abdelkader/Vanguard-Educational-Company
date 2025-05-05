@@ -6,7 +6,13 @@ import { uploadFileToCloudinary } from "../../utils/helper";
 function LogoForm({ setIsOpen, editLogo }) {
   const isEditSession = !!editLogo;
 
-  const { register, handleSubmit, reset, setValue } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: "",
       link: "",
@@ -61,7 +67,8 @@ function LogoForm({ setIsOpen, editLogo }) {
   };
 
   const isLoading = isCreating || isUpdating || uploadingLogo;
-  const error = createError || updateError;
+  const error =
+    createError || updateError || errors.name || errors.link || errors.url;
 
   return (
     <form
@@ -158,7 +165,7 @@ function LogoForm({ setIsOpen, editLogo }) {
 
         {error && (
           <div className="bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-3 rounded-md text-sm">
-            Error: {error.message}
+            Error: All Field ara required
           </div>
         )}
 
