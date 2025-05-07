@@ -8,7 +8,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import AdminLayout from "./features/admin/AdminLayout";
 import MainLayout from "./ui/MainLayout";
-
+import MemberDetails from "./features/teamMember/MemberDetails";
 import Dashboard from "./features/admin/Dashboard";
 import AdminService from "./features/projectService/AdminService";
 import AdminTeam from "./features/teamMember/AdminTeam";
@@ -50,6 +50,7 @@ function App() {
             <Route path="commercial" element={<CommercialVideos />} />
             <Route path="blogs" element={<Blog />} />
             <Route path="blogs/:title" element={<BlogPage />} />
+            <Route path="member/:title" element={<MemberDetails />} />
             <Route path="Request" element={<RequestFrom />} />
             <Route path="*" element={<NotFound />} />
           </Route>

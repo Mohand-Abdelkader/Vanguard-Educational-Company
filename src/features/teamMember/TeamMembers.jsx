@@ -2,6 +2,7 @@ import Member from "./Member";
 import { useTranslation } from "react-i18next";
 import { useMembers } from "../../hooks/teamMemberCustomHook/useMembers";
 import Loader from "../../ui/Loader";
+import { Link } from "react-router-dom";
 
 function TeamMember() {
   const { t, i18n } = useTranslation();
@@ -9,7 +10,7 @@ function TeamMember() {
 
   const { teamMembers, isLoading } = useMembers();
   if (isLoading) return <Loader />;
-
+  console.log(teamMembers);
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3 mb-4">
@@ -23,12 +24,14 @@ function TeamMember() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map((member) => (
-          <Member
-            key={member.id}
-            name={member.name[lang]}
-            title={member.title[lang]}
-            image={member.image}
-          />
+          <Link to={`/member/${member.name[lang]}`} state={member}>
+            <Member
+              key={member.id}
+              name={member.name[lang]}
+              title={member.title[lang]}
+              image={member.image}
+            />
+          </Link>
         ))}
       </div>
     </div>
@@ -36,3 +39,4 @@ function TeamMember() {
 }
 
 export default TeamMember;
+//
