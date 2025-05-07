@@ -1,3 +1,4 @@
+import Button from "../../ui/Button";
 function Member({ name, title, image }) {
   return (
     <div className="bg-white dark:bg-accent/30 rounded-xl p-2 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group">
@@ -19,7 +20,9 @@ function Member({ name, title, image }) {
         {name}
       </h3>
       {!title && <div className="h-6"></div>} {/* Spacer when no title */}
-      <div className="mt-4 flex justify-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+      <div className="mt-4 flex justify-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity">
+        <Button size="small">Know More</Button>
+      </div>
     </div>
   );
 }

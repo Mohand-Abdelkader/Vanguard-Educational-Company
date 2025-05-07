@@ -1,7 +1,7 @@
 import * as LucideIcons from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-function ServiceCard({ icon, title, description, color = "#509951" }) {
+import { Link } from "react-router-dom";
+function ServiceCard({ icon, title, description, color = "#509951", service }) {
   const { t } = useTranslation();
   const IconComponent = LucideIcons[icon];
 
@@ -29,8 +29,9 @@ function ServiceCard({ icon, title, description, color = "#509951" }) {
 
         {/* Learn more link */}
         <div className="mt-6">
-          <a
-            href="#"
+          <Link
+            to={`service/${title}`}
+            state={service}
             className="inline-flex items-center text-sm font-medium transition-colors duration-300 group-hover:translate-x-2"
             style={{ color }}
           >
@@ -50,7 +51,7 @@ function ServiceCard({ icon, title, description, color = "#509951" }) {
               <path d="M5 12h14"></path>
               <path d="m12 5 7 7-7 7"></path>
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
 

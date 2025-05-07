@@ -10,6 +10,7 @@ function ProjectService() {
 
   const { projectService, isLoading } = useService();
   if (isLoading) return <Loader />;
+  console.log(projectService);
 
   return (
     <>
@@ -27,6 +28,7 @@ function ProjectService() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {projectService.map((service) => (
             <ServiceCard
+              service={service}
               key={service.id}
               title={service.title[lang]}
               icon={service.icon}
@@ -34,25 +36,6 @@ function ProjectService() {
               info={service.info[lang]}
             />
           ))}
-        </div>
-
-        <div className="mt-16 flex justify-center">
-          <a
-            href="#contact"
-            className="bg-secondary hover:bg-secondary-dark text-white font-medium py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2"
-            onClick={(e) => {
-              e.preventDefault();
-              const element = document.getElementById("contact");
-              if (element) {
-                element.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }
-            }}
-          >
-            {t("services.getStarted")}
-          </a>
         </div>
       </div>
     </>

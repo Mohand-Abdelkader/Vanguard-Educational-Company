@@ -16,10 +16,13 @@ import AdminActivities from "./features/activities/AdminActivities";
 import AdminBlogs from "./features/blogs/AdminBlogs";
 import AdminLogos from "./features/logos/AdminLogos";
 import AdminRequests from "./features/requests/AdminRequests";
-
+import ItemDetails from "./ui/ItemDetails";
 import { Toaster } from "react-hot-toast";
 import { Toaster as Sonner } from "sonner";
 import RequestFrom from "./features/requests/RequestFrom";
+import ScrollToTop from "./ui/ScrollToTop";
+import AboutUs from "./pages/AboutUs";
+import WhatsAppButton from "./ui/WhatsApp";
 const queryClient = new QueryClient({
   defaultOptions: {
     staleTime: 0,
@@ -29,6 +32,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HashRouter>
+        <ScrollToTop />
+        <WhatsAppButton
+          phoneNumber="+966544862844" // Replace with your actual WhatsApp number
+          message="Hello! I'm interested in Vanguard Educational Company services."
+        />
         <Routes>
           {/* Admin routes - no navbar/footer */}
           <Route path="/admin" element={<AdminLayout />}>
@@ -40,7 +48,6 @@ function App() {
             <Route path="blogs" element={<AdminBlogs />} />
             <Route path="logos" element={<AdminLogos />} />
             <Route path="requests" element={<AdminRequests />} />
-
             {/* Add more admin routes as needed */}
           </Route>
 
@@ -48,9 +55,13 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<AppLayout />} />
             <Route path="commercial" element={<CommercialVideos />} />
+
+            <Route path="about" element={<AboutUs />} />
             <Route path="blogs" element={<Blog />} />
             <Route path="blogs/:title" element={<BlogPage />} />
             <Route path="member/:title" element={<MemberDetails />} />
+            <Route path="service/:serviceName" element={<ItemDetails />} />
+            <Route path="activity/:activityName" element={<ItemDetails />} />
             <Route path="Request" element={<RequestFrom />} />
             <Route path="*" element={<NotFound />} />
           </Route>

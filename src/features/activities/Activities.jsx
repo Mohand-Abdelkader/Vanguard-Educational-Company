@@ -15,6 +15,7 @@ function Activities() {
     setVisibleItems(activities.length);
   };
   if (isLoading) return <Loader />;
+  console.log(activities);
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col items-center mb-12">
@@ -35,6 +36,7 @@ function Activities() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         {activities.slice(0, visibleItems).map((activity) => (
           <ActivityCard
+            activity={activity}
             key={activity.id}
             icon={activity.icon}
             title={activity.title[lang]}

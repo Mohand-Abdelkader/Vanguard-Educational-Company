@@ -104,11 +104,11 @@ function Navbar() {
               </Link>
 
               <Link
-                to="/commercial"
+                to="/about"
                 className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
               >
-                <Video size={18} />
-                {t("nav.commercial")}
+                <Users size={18} />
+                {t("nav.aboutUs")}
               </Link>
               <Link
                 to="/blogs"
@@ -245,12 +245,12 @@ function Navbar() {
           </Link>
 
           <Link
-            to="/commercial"
+            to="/about"
             className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
           >
             <div className="flex items-center gap-3">
-              <Video size={18} />
-              {t("nav.commercial")}
+              <Users size={18} />
+              {t("nav.aboutUs")}
             </div>
           </Link>
 

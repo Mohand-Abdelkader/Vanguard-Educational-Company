@@ -10,7 +10,7 @@ function TeamMember() {
 
   const { teamMembers, isLoading } = useMembers();
   if (isLoading) return <Loader />;
-  console.log(teamMembers);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center gap-3 mb-4">
@@ -24,7 +24,11 @@ function TeamMember() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamMembers.map((member) => (
-          <Link to={`/member/${member.name[lang]}`} state={member}>
+          <Link
+            to={`/member/${member.name[lang]}`}
+            state={member}
+            key={member.id}
+          >
             <Member
               key={member.id}
               name={member.name[lang]}

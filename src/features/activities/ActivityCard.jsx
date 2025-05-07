@@ -1,7 +1,7 @@
 import * as LucideIcons from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-function ActivityCard({ icon, title, description, color }) {
+import { Link } from "react-router-dom";
+function ActivityCard({ icon, title, description, color, activity }) {
   const { t } = useTranslation();
   const IconComponent = LucideIcons[icon];
   return (
@@ -35,7 +35,9 @@ function ActivityCard({ icon, title, description, color }) {
 
         {/* Button with background color */}
         <div className="flex justify-center mt-auto">
-          <button
+          <Link
+            to={`activity/${title}`}
+            state={activity}
             className="py-2.5 px-5 rounded-full text-white text-sm flex items-center gap-2 transition-all duration-300 group-hover:shadow-lg transform group-hover:translate-y-[-2px]"
             style={{ backgroundColor: color }}
           >
@@ -55,7 +57,7 @@ function ActivityCard({ icon, title, description, color }) {
               <path d="M5 12h14"></path>
               <path d="m12 5 7 7-7 7"></path>
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
 
