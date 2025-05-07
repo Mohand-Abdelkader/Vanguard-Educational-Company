@@ -6,6 +6,7 @@ import {
   FileText,
   Image,
   MessageSquare,
+  Server,
 } from "lucide-react";
 
 function AdminSidebar() {
@@ -18,6 +19,7 @@ function AdminSidebar() {
     { name: "Activities", icon: Activity, path: "/admin/activities" },
     { name: "Blogs", icon: FileText, path: "/admin/blogs" },
     { name: "Logos", icon: Image, path: "/admin/logos" },
+    { name: "Service", icon: Server, path: "/admin/services" },
     { name: "Requests", icon: MessageSquare, path: "/admin/requests" },
   ];
 
