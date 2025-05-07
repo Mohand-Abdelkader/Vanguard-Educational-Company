@@ -16,7 +16,6 @@ function AdminBlogs() {
   }
 
   function openEditForm(blog) {
-    console.log(blog);
     setEditBlog(blog);
     setIsOpen(true);
   }

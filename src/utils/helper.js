@@ -1,3 +1,4 @@
+import * as LucideIcons from "lucide-react";
 export async function uploadFileToCloudinary(file) {
   const url = `https://api.cloudinary.com/v1_1/${
     import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
@@ -27,3 +28,47 @@ export async function uploadFileToCloudinary(file) {
     return null;
   }
 }
+
+// Log them as a copy-ready array
+export const icons = [
+  "Book",
+  "BookA",
+  "BookAIcon",
+  "BookAudio",
+  "BookCheck",
+  "BookCopy",
+  "Calendar",
+  "Calendar1",
+  "Clipboard",
+  "ClipboardCheck",
+  "Codepen",
+  "DoorOpen",
+  "File",
+  "FileArchive",
+  "FileAudio",
+  "Folder",
+  "FolderArchive",
+  "FolderCheck",
+  "GraduationCap",
+  "LockKeyholeOpen",
+  "LockOpen",
+  "LockOpenIcon",
+  "MailOpenIcon",
+  "Notebook",
+  "NotebookIcon",
+  "NotebookPen",
+  "PanelTopOpenIcon",
+  "Pen",
+  "PenBox",
+  "PenBoxIcon",
+  "PenIcon",
+  "PresentationIcon",
+  "School",
+  "School2",
+  "School2Icon",
+  "SchoolIcon",
+  "UserPen",
+  "UserPenIcon",
+  "WifiPen",
+  "WifiPenIcon",
+];

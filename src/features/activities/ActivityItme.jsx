@@ -1,10 +1,22 @@
 import { Edit, Trash2, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { toast as sonner } from "sonner";
 
-function ActivityItem({ activity }) {
+import { useDeleteActivity } from "../../hooks/activitesCustomHooks/useDeleteActivity";
+function ActivityItem({ activity, openEditForm }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
+  const { deleteActivity, isDeleting } = useDeleteActivity();
 
+  const handleDelete = () => {
+    sonner("Are you sure you want to delete?", {
+      action: {
+        label: "Delete",
+        onClick: () => deleteActivity(activity.id),
+      },
+    });
+  };
+  //
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
@@ -47,12 +59,15 @@ function ActivityItem({ activity }) {
           {/* Desktop view - show buttons */}
           <div className="hidden md:flex space-x-2">
             <button
+              onClick={() => openEditForm(activity)}
               className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-1 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
               title="Edit member"
             >
               <Edit size={18} />
             </button>
             <button
+              disabled={isDeleting}
+              onClick={handleDelete}
               className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
               title="Delete member"
             >
