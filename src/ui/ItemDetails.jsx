@@ -86,7 +86,11 @@ function ItemDetails() {
           </div>
         </div>
         {isOpen && (
-          <ItemRequest isOpen={isOpen} onClose={() => setIsOpen(false)} />
+          <ItemRequest
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            value={item.title.en}
+          />
         )}
       </div>
     </>

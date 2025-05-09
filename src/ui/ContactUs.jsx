@@ -20,9 +20,6 @@ function ContactUs() {
   } = useForm();
 
   function onSubmit(data) {
-    console.log("Form Data:", data);
-    console.log(isSubmitting);
-    console.log(isCreating);
     createRequest(data, {
       onSuccess: () => {
         reset();
