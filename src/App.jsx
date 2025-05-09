@@ -24,32 +24,40 @@ import ScrollToTop from "./ui/ScrollToTop";
 import AboutUs from "./pages/AboutUs";
 import WhatsAppButton from "./ui/WhatsApp";
 import AdminLogin from "./features/auth/AdminLogin";
+import ProtectedRoute from "./ui/ProtectedRoute";
+
 const queryClient = new QueryClient({
   defaultOptions: {
     staleTime: 0,
   },
 });
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HashRouter>
         <ScrollToTop />
         <WhatsAppButton
-          phoneNumber="+966544862844" // Replace with your actual WhatsApp number
+          phoneNumber="+966544862844"
           message="Hello! I'm interested in Vanguard Educational Company services."
         />
         <Routes>
-          {/* Admin routes - no navbar/footer */}
-          <Route path="/admin" element={<AdminLayout />}>
+          {/* Admin routes - protected */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="services" element={<AdminService />} />
             <Route path="team" element={<AdminTeam />} />
             <Route path="activities" element={<AdminActivities />} />
-
             <Route path="blogs" element={<AdminBlogs />} />
             <Route path="logos" element={<AdminLogos />} />
             <Route path="requests" element={<AdminRequests />} />
-            {/* Add more admin routes as needed */}
           </Route>
 
           {/* Main app routes - with navbar/footer */}
@@ -57,7 +65,6 @@ function App() {
             <Route index element={<AppLayout />} />
             <Route path="login" element={<AdminLogin />} />
             <Route path="commercial" element={<CommercialVideos />} />
-
             <Route path="about" element={<AboutUs />} />
             <Route path="blogs" element={<Blog />} />
             <Route path="blogs/:title" element={<BlogPage />} />
