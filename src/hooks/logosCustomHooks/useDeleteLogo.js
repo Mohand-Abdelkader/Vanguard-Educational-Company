@@ -7,7 +7,7 @@ export function useDeleteLogo() {
   const queryClient = useQueryClient();
   const {
     mutate: deleteLogo,
-    isLoading: isDeleting,
+    isPending: isDeleting,
     error,
   } = useMutation({
     mutationFn: (id) => deleteLogoApi(id),

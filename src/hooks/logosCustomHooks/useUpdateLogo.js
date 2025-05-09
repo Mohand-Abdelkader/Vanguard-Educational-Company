@@ -3,7 +3,7 @@ import { updateLogo as updataLogoApi } from "../../services/logoApi";
 import toast from "react-hot-toast";
 export function useUpdateLogo() {
   const queryClint = useQueryClient();
-  const { mutate: updateLogo, isLoading: isUpdating } = useMutation({
+  const { mutate: updateLogo, isPending: isUpdating } = useMutation({
     mutationFn: ({ id, newData }) => updataLogoApi(id, newData),
     onSuccess: () => {
       toast.success("Updated Successfully");

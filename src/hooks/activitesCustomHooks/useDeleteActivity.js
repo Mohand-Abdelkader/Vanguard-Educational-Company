@@ -5,7 +5,7 @@ export function useDeleteActivity() {
   const queryClient = useQueryClient();
   const {
     mutate: deleteActivity,
-    isLoading: isDeleting,
+    isPending: isDeleting,
     error,
   } = useMutation({
     mutationFn: (id) => deleteActivityApi(id),

@@ -5,7 +5,7 @@ export function useDeleteService() {
   const queryClient = useQueryClient();
   const {
     mutate: deleteService,
-    isLoading: isDeleting,
+    isPending: isDeleting,
     error,
   } = useMutation({
     mutationFn: (id) => deleteServiceApi(id),

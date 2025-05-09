@@ -3,7 +3,7 @@ import { updateActivity as updateActivityApi } from "../../services/activitiesAp
 import toast from "react-hot-toast";
 export function useUpdateActivity() {
   const queryClint = useQueryClient();
-  const { mutate: updateActivity, isLoading: isUpdating } = useMutation({
+  const { mutate: updateActivity, isPending: isUpdating } = useMutation({
     mutationFn: ({ id, newData }) => updateActivityApi(id, newData),
     onSuccess: () => {
       toast.success("Updated Successfully");

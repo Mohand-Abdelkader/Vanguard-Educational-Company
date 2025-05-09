@@ -7,7 +7,7 @@ export function useDeleteBlog() {
   const queryClient = useQueryClient();
   const {
     mutate: deleteBlog,
-    isLoading: isDeleting,
+    isPending: isDeleting,
     error,
   } = useMutation({
     mutationFn: (id) => deleteBlogApi(id),

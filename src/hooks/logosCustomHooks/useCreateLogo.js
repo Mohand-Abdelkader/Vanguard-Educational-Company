@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export function useCreateLogo() {
   const queryClint = useQueryClient();
   const {
-    isLoading: isCreating,
+    isPending: isCreating,
     mutate: createLogo,
     error,
   } = useMutation({

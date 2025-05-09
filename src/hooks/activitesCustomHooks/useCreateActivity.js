@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export function useCreateActivity() {
   const queryClint = useQueryClient();
-  const { mutate: createActivity, isLoading: isCreating } = useMutation({
+  const { mutate: createActivity, isPending: isCreating } = useMutation({
     mutationFn: addActivity,
     onSuccess: () => {
       toast.success("new Activity Successfully Created ");

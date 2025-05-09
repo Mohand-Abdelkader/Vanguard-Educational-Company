@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export function useCreateBlog() {
   const queryClint = useQueryClient();
   const {
-    isLoading: isCreating,
+    isPending: isCreating,
     mutate: addBlog,
     error,
   } = useMutation({

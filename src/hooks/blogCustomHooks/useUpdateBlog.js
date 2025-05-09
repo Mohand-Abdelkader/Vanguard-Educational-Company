@@ -3,7 +3,7 @@ import { updateBlog as updateBlogApi } from "../../services/blogsApi";
 import toast from "react-hot-toast";
 export function useUpdateBlog() {
   const queryClint = useQueryClient();
-  const { mutate: updateBlog, isLoading: isUpdating } = useMutation({
+  const { mutate: updateBlog, isPending: isUpdating } = useMutation({
     mutationFn: ({ id, newData }) => updateBlogApi(id, newData),
     onSuccess: () => {
       toast.success("Updated Successfully");

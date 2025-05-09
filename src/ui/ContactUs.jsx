@@ -3,20 +3,45 @@ import Input from "./Input";
 import Textarea from "./TextArea";
 import { Mail, Phone, MapPin, Send, MessageSquare } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import "react-phone-input-2/lib/style.css";
+import { useCreateRequest } from "../hooks/requestsCustomHooks/useCreateRequest";
 
 function ContactUs() {
-  const { t } = useTranslation();
+  const { createRequest, isCreating } = useCreateRequest();
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  console.log(isCreating);
+  const { t } = useTranslation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  function onSubmit(data) {
+    console.log("Form Data:", data);
+    console.log(isSubmitting);
+    console.log(isCreating);
+    createRequest(data, {
+      onSuccess: () => {
+        reset();
+      },
+    });
   }
 
+  // Define styles for error messages based on your component's color scheme
+  const errorTextStyle =
+    "text-red-500 dark:text-red-400 text-sm mt-1 flex items-center gap-1";
+  const inputErrorBorderStyle = "border-red-500 dark:border-red-400";
+  const normalInputBorderStyle = "border-gray-200 dark:border-gray-700";
+  // const isLoading = isSubmitting || isCreating;
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
-        <h2 className="text-4xl font-bold text-primary">
-          {t("contact.title")}
+        <h2 className="text-4xl font-bold text-primary dark:text-white">
+          {t("contact.title", "Contact Us")}
         </h2>
       </div>
 
@@ -30,10 +55,13 @@ function ContactUs() {
             <div className="relative z-10">
               <MessageSquare className="h-10 w-10 mb-6" />
               <h3 className="text-2xl font-bold mb-4">
-                {t("contact.getInTouch")}
+                {t("contact.getInTouch", "Get in Touch")}
               </h3>
               <p className="text-white/80 mb-8">
-                {t("contact.formDescription")}
+                {t(
+                  "contact.formDescription",
+                  "Fill out the form and our team will get back to you as soon as possible."
+                )}
               </p>
 
               <div className="space-y-6 mt-10">
@@ -43,9 +71,9 @@ function ContactUs() {
                   </div>
                   <div>
                     <p className="text-sm text-white/60">
-                      {t("contact.email")}
+                      {t("contact.email", "Email")}
                     </p>
-                    <p>contact@example.com</p>
+                    <p>rashed.mohamed@yahoo.com</p>
                   </div>
                 </div>
 
@@ -55,9 +83,9 @@ function ContactUs() {
                   </div>
                   <div>
                     <p className="text-sm text-white/60">
-                      {t("contact.phone")}
+                      {t("contact.phone", "Phone")}
                     </p>
-                    <p>+1 (555) 123-4567</p>
+                    <p>+966 54 486 2844</p>
                   </div>
                 </div>
 
@@ -67,9 +95,9 @@ function ContactUs() {
                   </div>
                   <div>
                     <p className="text-sm text-white/60">
-                      {t("contact.address")}
+                      {t("contact.address", "Address")}
                     </p>
-                    <p>123 Business Street, Suite 100, City, ST 12345</p>
+                    <p>KSA -jeddah qurish street</p>
                   </div>
                 </div>
               </div>
@@ -79,60 +107,190 @@ function ContactUs() {
           {/* Contact Form */}
           <div className="p-8 md:p-12">
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
-              {t("contact.sendMessage")}
+              {t("contact.sendMessage", "Send a Message")}
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-6 dark:text-white"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t("contact.yourName")}
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    {t("contact.yourName", "Your Name")} *
                   </label>
                   <Input
+                    id="name"
                     type="text"
-                    placeholder="John Doe"
-                    className="w-full bg-gray-50 dark:bg-accent/50 border-gray-200 dark:border-gray-700 rounded-lg"
+                    placeholder={t("contact.yourNamePlaceholder", "John Doe")}
+                    className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
+                      errors.name
+                        ? inputErrorBorderStyle
+                        : normalInputBorderStyle
+                    }`}
+                    {...register("name", {
+                      required: t(
+                        "validation.nameRequired",
+                        "Name is required"
+                      ),
+                    })}
                   />
+                  {errors.name && (
+                    <p className={errorTextStyle}>{errors.name.message}</p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    {t("contact.yourEmail")}
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
+                    {t("contact.yourEmail", "Your Email")} *
                   </label>
                   <Input
+                    id="email"
                     type="email"
-                    placeholder="john@example.com"
-                    className="w-full bg-gray-50 dark:bg-accent/50 border-gray-200 dark:border-gray-700 rounded-lg"
+                    placeholder={t(
+                      "contact.yourEmailPlaceholder",
+                      "john@example.com"
+                    )}
+                    className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
+                      errors.email
+                        ? inputErrorBorderStyle
+                        : normalInputBorderStyle
+                    }`}
+                    {...register("email", {
+                      required: t(
+                        "validation.emailRequired",
+                        "Email is required"
+                      ),
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: t(
+                          "validation.emailInvalid",
+                          "Invalid email address"
+                        ),
+                      },
+                    })}
                   />
+                  {errors.email && (
+                    <p className={errorTextStyle}>{errors.email.message}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t("contact.subject")}
+                <label
+                  htmlFor="phoneNumber"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
+                  {t("contact.yourPhoneNumber", "Phone Number")} *
                 </label>
                 <Input
-                  type="text"
-                  placeholder="How can we help you?"
-                  className="w-full bg-gray-50 dark:bg-accent/50 border-gray-200 dark:border-gray-700 rounded-lg"
+                  id="phoneNumber"
+                  type="number"
+                  placeholder={t(
+                    "contact.PhoneNumber",
+                    "Phone Number with Your Country Code"
+                  )}
+                  className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
+                    errors.phoneNumber
+                      ? inputErrorBorderStyle
+                      : normalInputBorderStyle
+                  }`}
+                  {...register("phoneNumber", {
+                    required: t(
+                      "validation.phoneRequired",
+                      "Phone is required"
+                    ),
+                  })}
                 />
+                {errors.phoneNumber && (
+                  <p className={errorTextStyle}>{errors.phoneNumber.message}</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  {t("contact.message")}
+                <label
+                  htmlFor="serviceRequested"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
+                  {t("contact.subject", "Subject")} *
+                </label>
+                <Input
+                  id="serviceRequested"
+                  type="text"
+                  placeholder={t(
+                    "contact.subjectPlaceholder",
+                    "How can we help you?"
+                  )}
+                  className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
+                    errors.serviceRequested
+                      ? inputErrorBorderStyle
+                      : normalInputBorderStyle
+                  }`}
+                  {...register("serviceRequested", {
+                    required: t(
+                      "validation.subjectRequired",
+                      "Subject is required"
+                    ),
+                  })}
+                />
+                {errors.serviceRequested && (
+                  <p className={errorTextStyle}>
+                    {errors.serviceRequested.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="messageBody"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
+                  {t("contact.message", "Message")} *
                 </label>
                 <Textarea
-                  placeholder="Tell us about your inquiry..."
-                  className="w-full min-h-[150px] bg-gray-50 dark:bg-accent/50 border-gray-200 dark:border-gray-700 rounded-lg"
+                  id="messageBody"
+                  placeholder={t(
+                    "contact.messagePlaceholder",
+                    "Tell us about your inquiry..."
+                  )}
+                  className={`w-full min-h-[150px] bg-gray-50 dark:bg-accent/50 rounded-lg ${
+                    errors.messageBody
+                      ? inputErrorBorderStyle
+                      : normalInputBorderStyle
+                  }`}
+                  {...register("messageBody", {
+                    required: t(
+                      "validation.messageRequired",
+                      "Message is required"
+                    ),
+                  })}
                 />
+                {errors.messageBody && (
+                  <p className={errorTextStyle}>{errors.messageBody.message}</p>
+                )}
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg"
+                className="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg disabled:opacity-70"
+                disabled={isCreating}
               >
-                <Send className="h-4 w-4" />
-                {t("contact.submit")}
+                {isCreating ? (
+                  <div className="flex items-center gap-2">
+                    <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    {t("contact.submitting", "Sending...")}
+                  </div>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    {t("contact.submit", "Send Message")}
+                  </>
+                )}
               </Button>
             </form>
           </div>

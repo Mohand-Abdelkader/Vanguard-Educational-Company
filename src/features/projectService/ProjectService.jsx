@@ -10,7 +10,6 @@ function ProjectService() {
 
   const { projectService, isLoading } = useService();
   if (isLoading) return <Loader />;
-  console.log(projectService);
 
   return (
     <>
