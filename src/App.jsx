@@ -23,6 +23,7 @@ import RequestFrom from "./features/requests/RequestFrom";
 import ScrollToTop from "./ui/ScrollToTop";
 import AboutUs from "./pages/AboutUs";
 import WhatsAppButton from "./ui/WhatsApp";
+import AdminLogin from "./features/auth/AdminLogin";
 const queryClient = new QueryClient({
   defaultOptions: {
     staleTime: 0,
@@ -54,6 +55,7 @@ function App() {
           {/* Main app routes - with navbar/footer */}
           <Route path="/" element={<MainLayout />}>
             <Route index element={<AppLayout />} />
+            <Route path="login" element={<AdminLogin />} />
             <Route path="commercial" element={<CommercialVideos />} />
 
             <Route path="about" element={<AboutUs />} />

@@ -1,5 +1,6 @@
 const FIREBASE_URL =
   "https://vanguard-educational-company-default-rtdb.firebaseio.com";
+import { auth } from "../config/firebase-config";
 
 export async function getMembers() {
   try {
@@ -33,7 +34,12 @@ export async function getMemberById(memberId) {
 
 export async function addMember(member) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/members.json`, {
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(`${FIREBASE_URL}/members.json?auth=${token}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +49,7 @@ export async function addMember(member) {
 
     if (!response.ok) throw new Error("Failed to add member");
     const data = await response.json();
-    return { id: data.name, ...member }; // Firebase returns { name: "-NxYz..." } for the generated ID
+    return { id: data.name, ...member };
   } catch (error) {
     console.error("Error adding member:", error);
     throw error;
@@ -52,13 +58,21 @@ export async function addMember(member) {
 
 export async function updateMember(memberId, member) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/members/${memberId}.json`, {
-      method: "PATCH", // Using PATCH instead of PUT to update only the provided fields
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(member),
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/members/${memberId}.json?auth=${token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(member),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to update member");
     const data = await response.json();
@@ -71,11 +85,19 @@ export async function updateMember(memberId, member) {
 
 export async function deleteMember(memberId) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/members/${memberId}.json`, {
-      method: "DELETE",
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/members/${memberId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (!response.ok) throw new Error("Failed to delete member");
-    return true; // Return true on successful deletion
+    return true;
   } catch (error) {
     console.error("Error deleting member:", error);
     throw error;

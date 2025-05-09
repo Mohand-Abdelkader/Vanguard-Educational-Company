@@ -1,5 +1,6 @@
 const FIREBASE_URL =
   "https://vanguard-educational-company-default-rtdb.firebaseio.com";
+import { auth } from "../config/firebase-config";
 
 export async function getActivities() {
   try {
@@ -33,17 +34,25 @@ export async function getActivityById(activityId) {
 }
 export async function addActivity(activity) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/activities.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(activity),
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/activities.json?auth=${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(activity),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to add activity");
     const data = await response.json();
-    return { id: data.name, ...activity }; // Firebase returns { name: "-NxYz..." } for the generated ID
+    return { id: data.name, ...activity };
   } catch (error) {
     console.error("Error adding activity:", error);
     throw error;
@@ -51,10 +60,15 @@ export async function addActivity(activity) {
 }
 export async function updateActivity(activityId, activity) {
   try {
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
     const response = await fetch(
-      `${FIREBASE_URL}/activities/${activityId}.json`,
+      `${FIREBASE_URL}/activities/${activityId}.json?auth=${token}`,
       {
-        method: "PATCH", // Using PATCH instead of PUT to update only the provided fields
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -71,13 +85,19 @@ export async function updateActivity(activityId, activity) {
 }
 export async function deleteActivity(activityId) {
   try {
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
     const response = await fetch(
-      `${FIREBASE_URL}/activities/${activityId}.json`,
+      `${FIREBASE_URL}/activities/${activityId}.json?auth=${token}`,
       {
         method: "DELETE",
       }
     );
     if (!response.ok) throw new Error("Failed to delete activity");
+    return activityId;
   } catch (error) {
     console.error("Error deleting activity:", error);
     throw error;

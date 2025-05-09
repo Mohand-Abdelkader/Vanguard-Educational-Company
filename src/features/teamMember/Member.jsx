@@ -1,26 +1,26 @@
 import Button from "../../ui/Button";
 function Member({ name, title, image }) {
   return (
-    <div className="bg-white dark:bg-accent/30 rounded-xl p-2 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group">
+    <div className="p-2 transition-all duration-300 transform bg-white shadow-sm dark:bg-accent/30 rounded-xl hover:shadow-lg hover:-translate-y-2 group">
       <div className="relative mb-6">
-        <div className="w-28 h-28 sm:w-32 sm:h-32 bg-secondary/20 rounded-full mx-auto overflow-hidden border-4 border-primary/10 group-hover:border-primary/30 transition-colors">
+        <div className="mx-auto overflow-hidden transition-colors border-4 rounded-full w-28 h-28 sm:w-32 sm:h-32 bg-secondary/20 border-primary/10 group-hover:border-primary/30">
           <img
             src={image}
             alt={`${name}`}
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
         {title && (
-          <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs font-medium py-1 px-3 rounded-full shadow-md">
+          <div className="absolute px-3 py-1 text-xs font-medium text-white transform -translate-x-1/2 rounded-full shadow-md -bottom-3 left-1/2 bg-primary">
             {title}
           </div>
         )}
       </div>
-      <h3 className="text-xl font-semibold text-primary mb-2 group-hover:text-secondary transition-colors text-center">
+      <h3 className="mb-2 text-xl font-semibold text-center transition-colors text-primary group-hover:text-secondary">
         {name}
       </h3>
       {!title && <div className="h-6"></div>} {/* Spacer when no title */}
-      <div className="mt-4 flex justify-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="flex justify-center mt-4 space-x-3 transition-opacity opacity-0 group-hover:opacity-100">
         <Button size="small">Know More</Button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 const FIREBASE_URL =
   "https://vanguard-educational-company-default-rtdb.firebaseio.com";
+import { auth } from "../config/firebase-config";
 
 export async function getLogos() {
   try {
@@ -31,7 +32,12 @@ export async function getLogoById(logoId) {
 }
 export async function addLogo(logo) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/logos.json`, {
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(`${FIREBASE_URL}/logos.json?auth=${token}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +47,7 @@ export async function addLogo(logo) {
 
     if (!response.ok) throw new Error("Failed to add logo");
     const data = await response.json();
-    return { id: data.name, ...logo }; // Firebase returns { name: "-NxYz..." } for the generated ID
+    return { id: data.name, ...logo };
   } catch (error) {
     console.error("Error adding logo:", error);
     throw error;
@@ -49,13 +55,21 @@ export async function addLogo(logo) {
 }
 export async function updateLogo(logoId, logo) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/logos/${logoId}.json`, {
-      method: "PATCH", // Using PATCH instead of PUT to update only the provided fields
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(logo),
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/logos/${logoId}.json?auth=${token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(logo),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to update logo");
     return { id: logoId, ...logo };
@@ -66,9 +80,17 @@ export async function updateLogo(logoId, logo) {
 }
 export async function deleteLogo(logoId) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/logos/${logoId}.json`, {
-      method: "DELETE",
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/logos/${logoId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to delete logo");
     return logoId;

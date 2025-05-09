@@ -1,6 +1,6 @@
 const FIREBASE_URL =
   "https://vanguard-educational-company-default-rtdb.firebaseio.com";
-
+import { auth } from "../config/firebase-config";
 export async function getRequests() {
   try {
     const response = await fetch(`${FIREBASE_URL}/requests.json`);
@@ -52,10 +52,21 @@ export async function createRequest(request) {
 
 export async function deleteRequest(requestId) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/requests/${requestId}.json`, {
-      method: "DELETE",
-    });
+    const user = auth.currentUser; // Get the current authenticated user
+    if (!user) throw new Error("User is not authenticated");
+
+    // Get the authentication token
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/requests/${requestId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
+
     if (!response.ok) throw new Error("Failed to delete request");
+
     return true;
   } catch (error) {
     console.error("Error deleting request:", error);

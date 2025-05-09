@@ -1,5 +1,6 @@
 const FIREBASE_URL =
   "https://vanguard-educational-company-default-rtdb.firebaseio.com";
+import { auth } from "../config/firebase-config";
 
 export async function getBlogs() {
   try {
@@ -31,7 +32,12 @@ export async function getBlogById(blogId) {
 }
 export async function addBlog(blog) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/blogs.json`, {
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(`${FIREBASE_URL}/blogs.json?auth=${token}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +47,7 @@ export async function addBlog(blog) {
 
     if (!response.ok) throw new Error("Failed to add blog");
     const data = await response.json();
-    return { id: data.name, ...blog }; // Firebase returns { name: "-NxYz..." } for the generated ID
+    return { id: data.name, ...blog };
   } catch (error) {
     console.error("Error adding blog:", error);
     throw error;
@@ -49,13 +55,21 @@ export async function addBlog(blog) {
 }
 export async function updateBlog(blogId, blog) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/blogs/${blogId}.json`, {
-      method: "PATCH", // Using PATCH instead of PUT to update only the provided fields
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blog),
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/blogs/${blogId}.json?auth=${token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(blog),
+      }
+    );
     if (!response.ok) throw new Error("Failed to update blog");
     return { id: blogId, ...blog };
   } catch (error) {
@@ -65,9 +79,17 @@ export async function updateBlog(blogId, blog) {
 }
 export async function deleteBlog(blogId) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/blogs/${blogId}.json`, {
-      method: "DELETE",
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/blogs/${blogId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (!response.ok) throw new Error("Failed to delete blog");
     return blogId;
   } catch (error) {

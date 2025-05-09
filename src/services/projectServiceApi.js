@@ -1,5 +1,6 @@
 const FIREBASE_URL =
   "https://vanguard-educational-company-default-rtdb.firebaseio.com";
+import { auth } from "../config/firebase-config";
 
 export async function getService() {
   try {
@@ -31,17 +32,25 @@ export async function getServiceById(serviceId) {
 }
 export async function addService(service) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/services.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(service),
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/services.json?auth=${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(service),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to add service");
     const data = await response.json();
-    return { id: data.name, ...service }; // Firebase returns { name: "-NxYz..." } for the generated ID
+    return { id: data.name, ...service };
   } catch (error) {
     console.error("Error adding service:", error);
     throw error;
@@ -49,13 +58,21 @@ export async function addService(service) {
 }
 export async function updateService(serviceId, service) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/services/${serviceId}.json`, {
-      method: "PATCH", // Using PATCH instead of PUT to update only the provided fields
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(service),
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/services/${serviceId}.json?auth=${token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(service),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to update service");
     return { id: serviceId, ...service };
@@ -66,9 +83,17 @@ export async function updateService(serviceId, service) {
 }
 export async function deleteService(serviceId) {
   try {
-    const response = await fetch(`${FIREBASE_URL}/services/${serviceId}.json`, {
-      method: "DELETE",
-    });
+    const user = auth.currentUser;
+    if (!user) throw new Error("User is not authenticated");
+
+    const token = await user.getIdToken();
+
+    const response = await fetch(
+      `${FIREBASE_URL}/services/${serviceId}.json?auth=${token}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (!response.ok) throw new Error("Failed to delete service");
     return true;
   } catch (error) {

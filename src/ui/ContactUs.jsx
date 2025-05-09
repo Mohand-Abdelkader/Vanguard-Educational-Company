@@ -9,8 +9,6 @@ import { useCreateRequest } from "../hooks/requestsCustomHooks/useCreateRequest"
 
 function ContactUs() {
   const { createRequest, isCreating } = useCreateRequest();
-
-  console.log(isCreating);
   const { t } = useTranslation();
   const {
     register,
