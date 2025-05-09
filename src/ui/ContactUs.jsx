@@ -26,7 +26,7 @@ function ContactUs() {
       },
     });
   }
-
+  const isLoading = isCreating || isSubmitting;
   // Define styles for error messages based on your component's color scheme
   const errorTextStyle =
     "text-red-500 dark:text-red-400 text-sm mt-1 flex items-center gap-1";
@@ -275,9 +275,9 @@ function ContactUs() {
               <Button
                 type="submit"
                 className="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg disabled:opacity-70"
-                disabled={isCreating}
+                disabled={isLoading}
               >
-                {isCreating ? (
+                {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                     {t("contact.submitting", "Sending...")}

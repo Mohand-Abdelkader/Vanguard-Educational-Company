@@ -1,8 +1,8 @@
-import { Edit, Trash2, MoreVertical } from "lucide-react";
+import { View, Trash2, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { toast as sonner } from "sonner";
 import { useDeleteRequest } from "../../hooks/requestsCustomHooks/useDeleteRequest";
-function RequestItem({ request }) {
+function RequestItem({ request, openInfo }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
   const { deleteRequest, isDeleting } = useDeleteRequest();
@@ -14,6 +14,7 @@ function RequestItem({ request }) {
       },
     });
   };
+
   //
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -70,11 +71,12 @@ function RequestItem({ request }) {
           {/* Desktop Actions */}
           <div className="hidden md:flex space-x-2">
             <button
+              onClick={() => openInfo(request)}
               className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
               title="Edit Request"
               aria-label="Edit Request"
             >
-              <Edit size={16} />
+              <View size={16} />
             </button>
             <button
               disabled={isDeleting}
@@ -108,7 +110,7 @@ function RequestItem({ request }) {
                     className="group flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                     role="menuitem"
                   >
-                    <Edit
+                    <View
                       size={16}
                       className="mr-3 text-blue-500 group-hover:text-blue-600"
                     />

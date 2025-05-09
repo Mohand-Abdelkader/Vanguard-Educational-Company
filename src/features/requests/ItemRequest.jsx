@@ -148,7 +148,7 @@ function ItemRequest({ isOpen, onClose, value }) {
                 </div>
                 <input
                   id="phoneNumber"
-                  type="phone"
+                  type="tel"
                   placeholder="your number, with country code"
                   {...register("phoneNumber", {
                     required: "Phone Number is required",
