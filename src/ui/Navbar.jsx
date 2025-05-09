@@ -17,7 +17,8 @@ import {
   Pointer,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import logo from "../assets/logo.png";
+import logo from "../assets/logoLight.png";
+import logo2 from "../assets/logoDark.png";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,15 +82,15 @@ function Navbar() {
           : "bg-primary dark:bg-accent"
       } shadow-lg transition-all duration-300`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             {/* Logo */}
-            <Link to="/" className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex items-center flex-shrink-0">
               <img
-                src={logo}
+                src={isDarkMode ? logo2 : logo}
                 alt="Vanguard Logo"
-                className="h-8 w-auto hover:scale-105 transition-transform duration-300"
+                className="w-auto h-8 transition-transform duration-300 hover:scale-105"
               />
             </Link>
 
@@ -97,7 +98,7 @@ function Navbar() {
             <div className="hidden md:ml-6 md:flex md:space-x-4">
               <Link
                 to="/"
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition-all rounded-md hover:text-green-100 hover:scale-105"
               >
                 <Home size={18} />
                 {t("nav.home")}
@@ -105,31 +106,24 @@ function Navbar() {
 
               <Link
                 to="/about"
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition-all rounded-md hover:text-green-100 hover:scale-105"
               >
                 <Users size={18} />
                 {t("nav.aboutUs")}
               </Link>
               <Link
                 to="/blogs"
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition-all rounded-md hover:text-green-100 hover:scale-105"
               >
                 <Pen size={18} />
-                Blogs
+                {t("nav.blogs")}
               </Link>
               <Link
                 to="/request"
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition-all rounded-md hover:text-green-100 hover:scale-105"
               >
                 <Pointer size={18} />
-                Join our Team
-              </Link>
-              <Link
-                to="/admin"
-                className="text-white hover:text-green-100 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-2 hover:scale-105 transition-all"
-              >
-                <Shield size={18} />
-                Admin
+                {t("nav.joinTeam")}
               </Link>
             </div>
           </div>
@@ -142,7 +136,7 @@ function Navbar() {
                 onClick={() => setShowLanguageMenu(!showLanguageMenu)}
                 aria-label="Change language"
               >
-                <Globe className="h-4 w-4" />
+                <Globe className="w-4 h-4" />
                 <span className="text-sm font-medium">
                   {i18n.language === "ar" ? "العربية" : "English"}
                 </span>
@@ -155,7 +149,7 @@ function Navbar() {
 
               {/* Language dropdown menu - Updated Modern Design */}
               {showLanguageMenu && (
-                <div className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black/5 focus:outline-none z-50 overflow-hidden transition-all duration-300 animate-fadeIn">
+                <div className="absolute right-0 z-50 w-48 mt-2 overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-lg dark:bg-gray-800 ring-1 ring-black/5 focus:outline-none animate-fadeIn">
                   <div className="py-1" role="menu" aria-orientation="vertical">
                     <button
                       onClick={() => changeLanguage("en")}
@@ -200,27 +194,27 @@ function Navbar() {
 
             {/* Dark Mode Toggle */}
             <button
-              className="text-white hover:text-green-100 p-2 rounded-full hover:bg-white/10 transition-colors duration-300"
+              className="p-2 text-white transition-colors duration-300 rounded-full hover:text-green-100 hover:bg-white/10"
               onClick={toggleDarkMode}
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
-                <Sun className="h-5 w-5" />
+                <Sun className="w-5 h-5" />
               ) : (
-                <Moon className="h-5 w-5" />
+                <Moon className="w-5 h-5" />
               )}
             </button>
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden text-white hover:text-green-100 p-2 rounded-full hover:bg-white/10 transition-colors duration-300"
+              className="p-2 text-white transition-colors duration-300 rounded-full md:hidden hover:text-green-100 hover:bg-white/10"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -236,7 +230,7 @@ function Navbar() {
         <div className="px-2 pt-2 pb-3 space-y-1">
           <Link
             to="/"
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+            className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-green-100 hover:bg-white/10"
           >
             <div className="flex items-center gap-3">
               <Home size={18} />
@@ -246,7 +240,7 @@ function Navbar() {
 
           <Link
             to="/about"
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+            className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-green-100 hover:bg-white/10"
           >
             <div className="flex items-center gap-3">
               <Users size={18} />
@@ -256,31 +250,21 @@ function Navbar() {
 
           <Link
             to="/blogs"
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+            className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-green-100 hover:bg-white/10"
           >
             <div className="flex items-center gap-3">
               <Pen size={18} />
-              Blogs
+              {t("nav.blogs")}
             </div>
           </Link>
 
           <Link
             to="/request"
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+            className="block px-3 py-2 text-base font-medium text-white rounded-md hover:text-green-100 hover:bg-white/10"
           >
             <div className="flex items-center gap-3">
               <Pointer size={18} />
-              Join our Team
-            </div>
-          </Link>
-
-          <Link
-            to="/admin"
-            className="text-white hover:text-green-100 block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
-          >
-            <div className="flex items-center gap-3">
-              <Shield size={18} />
-              Admin
+              {t("nav.joinTeam")}
             </div>
           </Link>
         </div>

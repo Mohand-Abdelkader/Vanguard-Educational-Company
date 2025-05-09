@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import NotFound from "./ui/NotFound";
 import CommercialVideos from "./features/videos/CommercialVideos";
@@ -32,49 +32,63 @@ const queryClient = new QueryClient({
   },
 });
 
-function App() {
+// Create a wrapper component to handle the WhatsApp button visibility
+function AppContent() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <HashRouter>
-        <ScrollToTop />
+    <>
+      <ScrollToTop />
+      {!isAdminRoute && (
         <WhatsAppButton
           phoneNumber="+966544862844"
           message="Hello! I'm interested in Vanguard Educational Company services."
         />
-        <Routes>
-          {/* Admin routes - protected */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Dashboard />} />
-            <Route path="services" element={<AdminService />} />
-            <Route path="team" element={<AdminTeam />} />
-            <Route path="activities" element={<AdminActivities />} />
-            <Route path="blogs" element={<AdminBlogs />} />
-            <Route path="logos" element={<AdminLogos />} />
-            <Route path="requests" element={<AdminRequests />} />
-          </Route>
+      )}
+      <Routes>
+        {/* Admin routes - protected */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="services" element={<AdminService />} />
+          <Route path="team" element={<AdminTeam />} />
+          <Route path="activities" element={<AdminActivities />} />
+          <Route path="blogs" element={<AdminBlogs />} />
+          <Route path="logos" element={<AdminLogos />} />
+          <Route path="requests" element={<AdminRequests />} />
+        </Route>
 
-          {/* Main app routes - with navbar/footer */}
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<AppLayout />} />
-            <Route path="login" element={<AdminLogin />} />
-            <Route path="commercial" element={<CommercialVideos />} />
-            <Route path="about" element={<AboutUs />} />
-            <Route path="blogs" element={<Blog />} />
-            <Route path="blogs/:title" element={<BlogPage />} />
-            <Route path="member/:title" element={<MemberDetails />} />
-            <Route path="service/:serviceName" element={<ItemDetails />} />
-            <Route path="activity/:activityName" element={<ItemDetails />} />
-            <Route path="Request" element={<RequestFrom />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        {/* Main app routes - with navbar/footer */}
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<AppLayout />} />
+          <Route path="login" element={<AdminLogin />} />
+          <Route path="commercial" element={<CommercialVideos />} />
+          <Route path="about" element={<AboutUs />} />
+          <Route path="blogs" element={<Blog />} />
+          <Route path="blogs/:title" element={<BlogPage />} />
+          <Route path="member/:title" element={<MemberDetails />} />
+          <Route path="service/:serviceName" element={<ItemDetails />} />
+          <Route path="activity/:activityName" element={<ItemDetails />} />
+          <Route path="Request" element={<RequestFrom />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <HashRouter>
+        <AppContent />
       </HashRouter>
       <Toaster
         position="top-center"

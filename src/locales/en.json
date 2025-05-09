@@ -4,7 +4,9 @@
     "sharedPortal": "Shared Portal",
     "ourTeam": "Our Team",
     "activities": "Activities",
-    "aboutUs": "About Us"
+    "aboutUs": "About Us",
+    "blogs": "Blogs",
+    "joinTeam": "Join Our Team"
   },
   "language": {
     "english": "English",
@@ -21,7 +23,7 @@
     "title": "About Us",
     "paragraph1": "At Vanguard Educational Company, we believe that education today faces unprecedented challenges. In a world where social media influences are stronger than ever, and traditional teaching methods can no longer keep pace with the needs of modern parents and students, a new approach is needed.",
     "paragraph2": "Our response? A unique educational model that embraces scientific innovation while staying true to authentic values — preparing children for a rapidly changing world without losing their moral foundation.",
-    "discoverServices": "Discover our services",
+    "discoverServices": "Discover Our Services",
     "vision": {
       "title": "Our Vision",
       "description": "We aim to bridge the gap between modern education and traditional values, helping students thrive intellectually, socially, and ethically."
@@ -32,46 +34,55 @@
     },
     "values": {
       "title": "Our Values",
-      "value1": "Commitment to virtue and ideals",
-      "value2": "Embracing scientific and cultural diversity",
-      "value3": "Continuous development and adaptability",
-      "value4": "Respect for heritage while advancing innovation"
+      "value1": "Commitment to Virtue and Ideals",
+      "value2": "Embracing Scientific and Cultural Diversity",
+      "value3": "Continuous Development and Adaptability",
+      "value4": "Respect for Heritage While Advancing Innovation"
     }
   },
   "portal": {
-    "title": "Egy-Shared Portal",
+    "title": "Egypt Shared Portal",
     "description": "Access our shared resources in Egypt and collaborate with team members through our dedicated portals designed for students, partners, and school staff.",
     "student": {
-      "title": "Student Service",
+      "title": "Student Portal",
       "description": "Access learning materials, submit assignments, and track your academic progress."
     },
     "partner": {
-      "title": "Partner Service",
+      "title": "Partner Portal",
       "description": "Collaborate on projects, access shared resources, and manage partnership initiatives."
     },
     "staff": {
-      "title": "School Staff Service",
+      "title": "Staff Portal",
       "description": "Manage classes, access administrative tools, and coordinate with other staff members."
     },
     "enterPortal": "Enter Portal"
   },
   "team": {
     "title": "Our Team",
-    "description": "Meet the dedicated professionals who make our educational vision a reality through their expertise and passion."
+    "description": "Meet the dedicated professionals who make our educational vision a reality through their expertise and passion.",
+    "knowMore": "Know More"
   },
   "contact": {
     "title": "Contact Us",
     "getInTouch": "Get in Touch",
-    "formDescription": "We'd love to hear from you. Please fill out this form or reach out directly using the contact information below.",
+    "formDescription": "Fill out the form and our team will get back to you as soon as possible.",
     "email": "Email",
     "phone": "Phone",
     "address": "Address",
-    "sendMessage": "Send us a message",
+    "sendMessage": "Send a Message",
     "yourName": "Your Name",
+    "yourNamePlaceholder": "John Doe",
     "yourEmail": "Your Email",
+    "yourEmailPlaceholder": "john@example.com",
+    "yourPhoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number with country code",
     "subject": "Subject",
-    "message": "Your Message",
-    "submit": "Submit"
+    "subjectPlaceholder": "How can we help you?",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your inquiry...",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "close": "close"
   },
   "footer": {
     "quickLinks": "Quick Links",
@@ -101,17 +112,50 @@
   },
   "activities": {
     "title": "Our Activities",
-    "description": "Discover the range of engaging activities we offer to our community and members to foster growth and learning.",
+    "description": "Discover the range of engaging activities we offer to our community to foster growth and learning.",
     "showMore": "Show More Activities",
     "learnMore": "Learn More"
   },
   "logos": {
     "title": "Our Partners",
-    "description": "We're proud to collaborate with these amazing organizations."
+    "description": "We're proud to collaborate with these leading organizations."
   },
   "blog": {
     "title": "Our Blog",
-    "description": "Explore our latest articles, research, and insights on education, technology, and cultural development",
+    "description": "Explore our latest articles, research, and insights on education, technology, and cultural development.",
     "readMore": "Read More"
+  },
+  "validation": {
+    "nameRequired": "Name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "phoneRequired": "Phone number is required",
+    "subjectRequired": "Subject is required",
+    "messageRequired": "Message is required",
+    "positionRequired": "Please select a position"
+  },
+  "request": {
+    "title": "Join Our Team",
+    "description": "We're always looking for talented individuals to join our educational journey. Fill out this form and we'll get back to you soon.",
+    "personalInfo": "Personal Information",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "John Doe",
+    "email": "Email Address",
+    "emailPlaceholder": "john@example.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+1 (555) 123-4567",
+    "position": "Position",
+    "selectPosition": "Select a position",
+    "positions": {
+      "teacher": "Teacher",
+      "administrator": "Administrator",
+      "counselor": "Counselor",
+      "it": "IT Specialist",
+      "other": "Other"
+    },
+    "coverLetter": "Cover Letter / Additional Information",
+    "coverLetterPlaceholder": "Tell us why you'd like to join our team...",
+    "submit": "Submit Application",
+    "submitting": "Submitting..."
   }
 }

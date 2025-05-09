@@ -25,18 +25,17 @@ function ContactUs() {
     });
   }
   const isLoading = isCreating || isSubmitting;
-  // Define styles for error messages based on your component's color scheme
   const errorTextStyle =
     "text-red-500 dark:text-red-400 text-sm mt-1 flex items-center gap-1";
   const inputErrorBorderStyle = "border-red-500 dark:border-red-400";
   const normalInputBorderStyle = "border-gray-200 dark:border-gray-700";
-  // const isLoading = isSubmitting || isCreating;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-1.5 bg-secondary rounded-full"></div>
         <h2 className="text-4xl font-bold text-primary dark:text-white">
-          {t("contact.title", "Contact Us")}
+          {t("contact.title")}
         </h2>
       </div>
 
@@ -50,13 +49,10 @@ function ContactUs() {
             <div className="relative z-10">
               <MessageSquare className="h-10 w-10 mb-6" />
               <h3 className="text-2xl font-bold mb-4">
-                {t("contact.getInTouch", "Get in Touch")}
+                {t("contact.getInTouch")}
               </h3>
               <p className="text-white/80 mb-8">
-                {t(
-                  "contact.formDescription",
-                  "Fill out the form and our team will get back to you as soon as possible."
-                )}
+                {t("contact.formDescription")}
               </p>
 
               <div className="space-y-6 mt-10">
@@ -66,7 +62,7 @@ function ContactUs() {
                   </div>
                   <div>
                     <p className="text-sm text-white/60">
-                      {t("contact.email", "Email")}
+                      {t("contact.email")}
                     </p>
                     <p>rashed.mohamed@yahoo.com</p>
                   </div>
@@ -78,7 +74,7 @@ function ContactUs() {
                   </div>
                   <div>
                     <p className="text-sm text-white/60">
-                      {t("contact.phone", "Phone")}
+                      {t("contact.phone")}
                     </p>
                     <p>+966 54 486 2844</p>
                   </div>
@@ -90,7 +86,7 @@ function ContactUs() {
                   </div>
                   <div>
                     <p className="text-sm text-white/60">
-                      {t("contact.address", "Address")}
+                      {t("contact.address")}
                     </p>
                     <p>KSA -jeddah qurish street</p>
                   </div>
@@ -102,7 +98,7 @@ function ContactUs() {
           {/* Contact Form */}
           <div className="p-8 md:p-12">
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
-              {t("contact.sendMessage", "Send a Message")}
+              {t("contact.sendMessage")}
             </h3>
 
             <form
@@ -115,22 +111,19 @@ function ContactUs() {
                     htmlFor="name"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
-                    {t("contact.yourName", "Your Name")} *
+                    {t("contact.yourName")} *
                   </label>
                   <Input
                     id="name"
                     type="text"
-                    placeholder={t("contact.yourNamePlaceholder", "John Doe")}
+                    placeholder={t("contact.yourNamePlaceholder")}
                     className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
                       errors.name
                         ? inputErrorBorderStyle
                         : normalInputBorderStyle
                     }`}
                     {...register("name", {
-                      required: t(
-                        "validation.nameRequired",
-                        "Name is required"
-                      ),
+                      required: t("validation.nameRequired"),
                     })}
                   />
                   {errors.name && (
@@ -142,31 +135,22 @@ function ContactUs() {
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                   >
-                    {t("contact.yourEmail", "Your Email")} *
+                    {t("contact.yourEmail")} *
                   </label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder={t(
-                      "contact.yourEmailPlaceholder",
-                      "john@example.com"
-                    )}
+                    placeholder={t("contact.yourEmailPlaceholder")}
                     className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
                       errors.email
                         ? inputErrorBorderStyle
                         : normalInputBorderStyle
                     }`}
                     {...register("email", {
-                      required: t(
-                        "validation.emailRequired",
-                        "Email is required"
-                      ),
+                      required: t("validation.emailRequired"),
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: t(
-                          "validation.emailInvalid",
-                          "Invalid email address"
-                        ),
+                        message: t("validation.emailInvalid"),
                       },
                     })}
                   />
@@ -181,25 +165,19 @@ function ContactUs() {
                   htmlFor="phoneNumber"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >
-                  {t("contact.yourPhoneNumber", "Phone Number")} *
+                  {t("contact.yourPhoneNumber")} *
                 </label>
                 <Input
                   id="phoneNumber"
                   type="number"
-                  placeholder={t(
-                    "contact.PhoneNumber",
-                    "Phone Number with Your Country Code"
-                  )}
+                  placeholder={t("contact.phoneNumberPlaceholder")}
                   className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
                     errors.phoneNumber
                       ? inputErrorBorderStyle
                       : normalInputBorderStyle
                   }`}
                   {...register("phoneNumber", {
-                    required: t(
-                      "validation.phoneRequired",
-                      "Phone is required"
-                    ),
+                    required: t("validation.phoneRequired"),
                   })}
                 />
                 {errors.phoneNumber && (
@@ -212,25 +190,19 @@ function ContactUs() {
                   htmlFor="serviceRequested"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >
-                  {t("contact.subject", "Subject")} *
+                  {t("contact.subject")} *
                 </label>
                 <Input
                   id="serviceRequested"
                   type="text"
-                  placeholder={t(
-                    "contact.subjectPlaceholder",
-                    "How can we help you?"
-                  )}
+                  placeholder={t("contact.subjectPlaceholder")}
                   className={`w-full bg-gray-50 dark:bg-accent/50 rounded-lg ${
                     errors.serviceRequested
                       ? inputErrorBorderStyle
                       : normalInputBorderStyle
                   }`}
                   {...register("serviceRequested", {
-                    required: t(
-                      "validation.subjectRequired",
-                      "Subject is required"
-                    ),
+                    required: t("validation.subjectRequired"),
                   })}
                 />
                 {errors.serviceRequested && (
@@ -245,24 +217,18 @@ function ContactUs() {
                   htmlFor="messageBody"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
                 >
-                  {t("contact.message", "Message")} *
+                  {t("contact.message")} *
                 </label>
                 <Textarea
                   id="messageBody"
-                  placeholder={t(
-                    "contact.messagePlaceholder",
-                    "Tell us about your inquiry..."
-                  )}
+                  placeholder={t("contact.messagePlaceholder")}
                   className={`w-full min-h-[150px] bg-gray-50 dark:bg-accent/50 rounded-lg ${
                     errors.messageBody
                       ? inputErrorBorderStyle
                       : normalInputBorderStyle
                   }`}
                   {...register("messageBody", {
-                    required: t(
-                      "validation.messageRequired",
-                      "Message is required"
-                    ),
+                    required: t("validation.messageRequired"),
                   })}
                 />
                 {errors.messageBody && (
@@ -278,12 +244,12 @@ function ContactUs() {
                 {isLoading ? (
                   <div className="flex items-center gap-2">
                     <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    {t("contact.submitting", "Sending...")}
+                    {t("contact.submitting")}
                   </div>
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    {t("contact.submit", "Send Message")}
+                    {t("contact.submit")}
                   </>
                 )}
               </Button>

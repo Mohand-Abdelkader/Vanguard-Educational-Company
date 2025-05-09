@@ -30,7 +30,7 @@ function RequestItem({ request, openInfo }) {
   }, []);
 
   return (
-    <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+    <tr className="transition-colors hover:bg-gray-50 dark:hover:bg-gray-700">
       {/* Contact Info Cell */}
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center">
@@ -59,20 +59,20 @@ function RequestItem({ request, openInfo }) {
       </td>
 
       {/* Service Type Cell */}
-      <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap">
-        <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+      <td className="hidden px-6 py-4 md:table-cell whitespace-nowrap">
+        <span className="inline-flex px-3 py-1 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-200">
           {request.serviceRequested}
         </span>
       </td>
 
       {/* Actions Cell */}
-      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
         <div className="relative inline-block text-left" ref={dropdownRef}>
           {/* Desktop Actions */}
-          <div className="hidden md:flex space-x-2">
+          <div className="hidden space-x-2 md:flex">
             <button
               onClick={() => openInfo(request)}
-              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+              className="p-2 text-blue-600 transition-colors rounded-full hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/30"
               title="Edit Request"
               aria-label="Edit Request"
             >
@@ -81,7 +81,7 @@ function RequestItem({ request, openInfo }) {
             <button
               disabled={isDeleting}
               onClick={handleDelete}
-              className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 p-2 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors disabled:opacity-50"
+              className="p-2 text-red-600 transition-colors rounded-full hover:text-red-900 dark:text-red-400 dark:hover:text-red-300 hover:bg-red-100 dark:hover:bg-red-900/30 disabled:opacity-50"
               title="Delete Request"
               aria-label="Delete Request"
             >
@@ -93,7 +93,7 @@ function RequestItem({ request, openInfo }) {
           <div className="md:hidden">
             <button
               onClick={() => setShowDropdown(!showDropdown)}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 transition-colors rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
               aria-label="More options"
               aria-expanded={showDropdown}
             >
@@ -104,22 +104,23 @@ function RequestItem({ request, openInfo }) {
             </button>
 
             {showDropdown && (
-              <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10">
+              <div className="absolute right-0 z-10 w-48 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
                 <div className="py-1" role="menu">
                   <button
-                    className="group flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => openInfo(request)}
+                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 group dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                     role="menuitem"
                   >
                     <View
                       size={16}
                       className="mr-3 text-blue-500 group-hover:text-blue-600"
                     />
-                    Edit Request
+                    View More
                   </button>
                   <button
                     onClick={handleDelete}
                     disabled={isDeleting}
-                    className="group flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
+                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 group dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
                     role="menuitem"
                   >
                     <Trash2

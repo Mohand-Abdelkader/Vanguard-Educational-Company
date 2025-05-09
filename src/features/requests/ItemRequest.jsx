@@ -2,8 +2,11 @@ import { useEffect, useRef } from "react";
 import { X, User, Mail, MessageSquare, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useCreateRequest } from "../../hooks/requestsCustomHooks/useCreateRequest";
+import { useTranslation } from "react-i18next";
+
 function ItemRequest({ isOpen, onClose, value }) {
   const { createRequest, isCreating } = useCreateRequest();
+  const { t } = useTranslation();
   const modalRef = useRef(null);
   const {
     register,
@@ -67,19 +70,19 @@ function ItemRequest({ isOpen, onClose, value }) {
       {/* Modal */}
       <div
         ref={modalRef}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 z-10 transform transition-all duration-300 ease-in-out"
+        className="z-10 w-full max-w-md mx-4 transition-all duration-300 ease-in-out transform bg-white rounded-lg shadow-xl dark:bg-gray-800"
         style={{ animation: "modalFadeIn 0.3s" }}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Contact Us
+            {t("contact.title")}
           </h3>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none"
           >
-            <X className="h-5 w-5" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
@@ -89,20 +92,20 @@ function ItemRequest({ isOpen, onClose, value }) {
             {/* Name */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Your Name
+                {t("contact.yourName")}
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="h-5 w-5 text-gray-400" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <User className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
                   id="name"
                   type="text"
-                  placeholder="John Doe"
+                  placeholder={t("contact.yourNamePlaceholder")}
                   {...register("name", {
-                    required: "This field is required",
+                    required: t("validation.nameRequired"),
                   })}
-                  className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 pl-10 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white"
                 />
               </div>
               {errors?.name?.message && (
@@ -115,20 +118,24 @@ function ItemRequest({ isOpen, onClose, value }) {
             {/* Email */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Email Address
+                {t("contact.yourEmail")}
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <Mail className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder={t("contact.yourEmailPlaceholder")}
                   {...register("email", {
-                    required: "Email Address is required",
+                    required: t("validation.emailRequired"),
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: t("validation.emailInvalid"),
+                    },
                   })}
-                  className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 pl-10 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white"
                 />
               </div>
               {errors?.email?.message && (
@@ -140,20 +147,20 @@ function ItemRequest({ isOpen, onClose, value }) {
             {/* phone */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Phone Number
+                {t("contact.yourPhoneNumber")}
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Phone className="h-5 w-5 text-gray-400" />
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <Phone className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
                   id="phoneNumber"
                   type="tel"
-                  placeholder="your number, with country code"
+                  placeholder={t("contact.phoneNumberPlaceholder")}
                   {...register("phoneNumber", {
-                    required: "Phone Number is required",
+                    required: t("validation.phoneRequired"),
                   })}
-                  className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 pl-10 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white"
                 />
               </div>
               {errors?.phoneNumber?.message && (
@@ -166,48 +173,49 @@ function ItemRequest({ isOpen, onClose, value }) {
             {/* Message */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                let Us know more about you
+                {t("contact.message")}
               </label>
               <div className="relative">
-                <div className="absolute top-3 left-3 flex items-start pointer-events-none">
-                  <MessageSquare className="h-5 w-5 text-gray-400" />
+                <div className="absolute flex items-start pointer-events-none top-3 left-3">
+                  <MessageSquare className="w-5 h-5 text-gray-400" />
                 </div>
                 <textarea
                   id="messageBody"
                   rows="4"
-                  placeholder="Let us Know More About you"
+                  placeholder={t("contact.messagePlaceholder")}
                   {...register("messageBody", {})}
-                  className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 pl-10 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white"
                 ></textarea>
               </div>
             </div>
 
-            <div className="space-y-2 hidden">
+            <div className="hidden space-y-2">
               <input
                 id="serviceRequested"
                 type="hidden"
                 value={value}
                 {...register("serviceRequested", {
-                  required: "this felid is required",
+                  required: t("validation.subjectRequired"),
                 })}
-                placeholder="your number, with country code"
-                className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 pl-10 text-gray-900 bg-white border border-gray-300 rounded-md shadow-sm dark:border-gray-600 focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white"
               />
             </div>
             {/* Footer */}
             <div className="flex justify-end gap-3 p-4 border-t dark:border-gray-700">
               <input
                 type="reset"
-                value="Close"
+                value={t("contact.close")}
                 onClick={onClose}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 rounded-md transition-colors"
+                className="px-4 py-2 text-sm font-medium text-gray-700 transition-colors bg-gray-100 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
               />
 
               <input
                 disabled={isLoading}
-                value="Submit"
+                value={
+                  isLoading ? t("contact.submitting") : t("contact.submit")
+                }
                 type="submit"
-                className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-md shadow-sm transition-colors"
+                className="px-4 py-2 text-sm font-medium text-white transition-colors rounded-md shadow-sm bg-primary hover:bg-primary-dark"
               />
             </div>
           </form>

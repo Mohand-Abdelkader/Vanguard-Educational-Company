@@ -1,5 +1,9 @@
 import Button from "../../ui/Button";
+import { useTranslation } from "react-i18next";
+
 function Member({ name, title, image }) {
+  const { t } = useTranslation();
+
   return (
     <div className="p-2 transition-all duration-300 transform bg-white shadow-sm dark:bg-accent/30 rounded-xl hover:shadow-lg hover:-translate-y-2 group">
       <div className="relative mb-6">
@@ -21,7 +25,7 @@ function Member({ name, title, image }) {
       </h3>
       {!title && <div className="h-6"></div>} {/* Spacer when no title */}
       <div className="flex justify-center mt-4 space-x-3 transition-opacity opacity-0 group-hover:opacity-100">
-        <Button size="small">Know More</Button>
+        <Button size="small">{t("team.knowMore")}</Button>
       </div>
     </div>
   );

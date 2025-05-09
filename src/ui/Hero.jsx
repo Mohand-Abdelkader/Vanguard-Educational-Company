@@ -1,31 +1,41 @@
-import logo from "../assets/logo.png";
+import logo from "../assets/logoLight.png";
+
 import { useTranslation } from "react-i18next";
 
 function Hero() {
   const { t } = useTranslation();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
+    <div className="relative px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
       {/* Background decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full -z-10 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-secondary/10 rounded-full -z-10 blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-primary/10 -z-10 blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-secondary/10 -z-10 blur-3xl"></div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div className="grid items-center grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="space-y-8 animate-fade-in">
           <div className="flex items-center gap-4">
-            <div className="w-2 h-16 bg-secondary rounded-full hidden sm:block"></div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-primary dark:text-secondary leading-tight hover:scale-105 transition-transform">
+            <div className="hidden w-2 h-16 rounded-full bg-secondary sm:block"></div>
+            <h1 className="font-serif text-4xl leading-tight transition-transform sm:text-5xl md:text-6xl text-primary dark:text-secondary hover:scale-105">
               {t("hero.title")}
             </h1>
           </div>
-          <p className="text-accent dark:text-secondary/80 text-lg sm:text-xl max-w-md capitalize">
+          <p className="max-w-md text-lg capitalize text-accent dark:text-secondary/80 sm:text-xl">
             {t("hero.subtitle")} <br /> {t("hero.subtitlePart2")}
           </p>
           <div className="flex items-center gap-4">
-            <button className="bg-secondary hover:bg-secondary-dark text-white font-medium py-3 sm:py-4 px-6 sm:px-10 rounded-full transition-all duration-300 text-base sm:text-lg hover:scale-105 hover:shadow-lg">
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="px-6 py-3 text-base font-medium text-white transition-all duration-300 rounded-full bg-secondary hover:bg-secondary-dark sm:py-4 sm:px-10 sm:text-lg hover:scale-105 hover:shadow-lg"
+            >
               {t("hero.getInTouch")}
-            </button>
-            <div className="hidden sm:block w-16 h-1 bg-primary/30 rounded-full"></div>
+            </a>
+            <div className="hidden w-16 h-1 rounded-full sm:block bg-primary/30"></div>
           </div>
         </div>
 
