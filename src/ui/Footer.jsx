@@ -29,15 +29,21 @@ function Footer() {
             <h4 className="text-lg font-bold">{t("footer.quickLinks")}</h4>
             <ul className="space-y-2 text-gray-200">
               <li>
-                <a
-                  href="#about"
+                <Link
+                  to="/about"
                   className="transition-colors hover:text-secondary"
                 >
                   {t("footer.aboutUs")}
-                </a>
+                </Link>
               </li>
               <li>
                 <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("services")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   href="#services"
                   className="transition-colors hover:text-secondary"
                 >
@@ -46,6 +52,12 @@ function Footer() {
               </li>
               <li>
                 <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("activities")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   href="#activities"
                   className="transition-colors hover:text-secondary"
                 >
@@ -54,6 +66,12 @@ function Footer() {
               </li>
               <li>
                 <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("contact")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   href="#contact"
                   className="transition-colors hover:text-secondary"
                 >
@@ -72,6 +90,12 @@ function Footer() {
             <ul className="space-y-2 text-gray-200">
               <li>
                 <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("portal")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   href="#portal"
                   className="transition-colors hover:text-secondary"
                 >
@@ -81,6 +105,12 @@ function Footer() {
 
               <li>
                 <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("team")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   href="#team"
                   className="transition-colors hover:text-secondary"
                 >
@@ -94,18 +124,14 @@ function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-bold"> {t("footer.followUs")}</h4>
             <div className="flex space-x-4">
-              <a href="#" className="transition-colors hover:text-secondary">
+              <a
+                target="_blank"
+                href="https://www.facebook.com/profile.php?id=100090617525610"
+                className="transition-colors hover:text-secondary"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="transition-colors hover:text-secondary">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="transition-colors hover:text-secondary">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="transition-colors hover:text-secondary">
-                <Linkedin className="w-5 h-5" />
-              </a>
+
               <Link
                 to="/login"
                 className="transition-colors hover:text-secondary"

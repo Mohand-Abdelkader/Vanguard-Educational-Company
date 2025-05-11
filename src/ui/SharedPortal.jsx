@@ -1,8 +1,10 @@
 import { Users, Building, GraduationCap } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import ItemRequest from "../features/requests/ItemRequest";
 function SharedPortal() {
   const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,8 +20,20 @@ function SharedPortal() {
           "portal.description",
           "Access our shared resources and collaborate with team members through our dedicated portals designed for students, partners, and school staff."
         )}
+        <button
+          className=" underline text-blue-700"
+          onClick={() => setIsOpen(true)}
+        >
+          {t("portal.link")}
+        </button>
       </p>
-
+      {isOpen && (
+        <ItemRequest
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          value={"create Account for Egy-Portal"}
+        />
+      )}
       <div className="grid md:grid-cols-3 gap-6">
         {/* Student Service Portal */}
         <a

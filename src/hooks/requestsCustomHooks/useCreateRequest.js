@@ -7,9 +7,7 @@ export function useCreateRequest() {
   const { mutate: createRequest, isPending: isCreating } = useMutation({
     mutationFn: createRequestApi,
     onSuccess: () => {
-      toast.success(
-        "your Requested has been send, we will reach out for you! "
-      );
+      toast.success("your Message Has been sent, We will reach out for you! ");
       queryClint.invalidateQueries({ queryKey: ["requests"] });
     },
     onError: (err) => toast.error(err.message),
