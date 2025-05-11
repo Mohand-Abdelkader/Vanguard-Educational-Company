@@ -7,7 +7,7 @@ import ar from "./locales/ar.json";
 
 i18n
   // detect user language
-  .use(LanguageDetector)
+  // .use(LanguageDetector)
   // pass the i18n instance to react-i18next
   .use(initReactI18next)
   // init i18next
@@ -31,8 +31,10 @@ i18n
 
 // Function to set document direction based on language
 export const setDocumentDirection = (language) => {
-  document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-  document.documentElement.lang = language;
+  console.log(language);
+  const effectiveLang = language || "en";
+  document.documentElement.dir = effectiveLang === "ar" ? "rtl" : "ltr";
+  document.documentElement.lang = effectiveLang;
 };
 
 // Set initial direction

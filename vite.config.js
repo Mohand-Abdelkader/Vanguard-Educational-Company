@@ -3,5 +3,8 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Vanguard-Educational-Company/",
+  base: "./",
+  build: {
+    assetsDir: "react-assets", // if you're renaming assets to avoid conflict
+  },
 });
