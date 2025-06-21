@@ -25,6 +25,8 @@ import AboutUs from "./pages/AboutUs";
 import WhatsAppButton from "./ui/WhatsApp";
 import AdminLogin from "./features/auth/AdminLogin";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import NobelPage from "./features/admission/NobelPage";
+import AdminAdmission from "./features/admission/AdminAdmission";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,6 +65,7 @@ function AppContent() {
           <Route path="blogs" element={<AdminBlogs />} />
           <Route path="logos" element={<AdminLogos />} />
           <Route path="requests" element={<AdminRequests />} />
+          <Route path="admission" element={<AdminAdmission />} />
         </Route>
 
         {/* Main app routes - with navbar/footer */}
@@ -72,7 +75,8 @@ function AppContent() {
           <Route path="commercial" element={<CommercialVideos />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="blogs" element={<Blog />} />
-          <Route path="blogs/:title" element={<BlogPage />} />
+          <Route path="blogs/category/:category" element={<Blog />} />
+          <Route path="University-Partnership" element={<NobelPage />} />
           <Route path="member/:title" element={<MemberDetails />} />
           <Route path="service/:serviceName" element={<ItemDetails />} />
           <Route path="activity/:activityName" element={<ItemDetails />} />

@@ -21,6 +21,7 @@ function AdminSidebar() {
     { name: "Logos", icon: Image, path: "/admin/logos" },
     { name: "Service", icon: Server, path: "/admin/services" },
     { name: "Requests", icon: MessageSquare, path: "/admin/requests" },
+    { name: "Admission", icon: MessageSquare, path: "/admin/admission" },
   ];
 
   return (

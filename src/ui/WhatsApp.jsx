@@ -1,5 +1,3 @@
-import React from "react";
-
 function WhatsAppButton({
   phoneNumber = "966500000000",
   message = "Hello! I'm interested in your services.",
