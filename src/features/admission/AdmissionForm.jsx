@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useCreateAdmission } from "../../hooks/admissionHooks/useAdmission";
+import { useTranslation } from "react-i18next";
 
 function AdmissionForm() {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -26,18 +28,18 @@ function AdmissionForm() {
       <div className="grid md:grid-cols-2 gap-6">
         {/* First Name */}
         <div className="flex flex-col">
-          <label className="text-left mb-2 font-medium text-gray-700">
-            First Name
+          <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+            {t("admissionForm.fields.firstName.label")}
           </label>
           <input
             type="text"
-            placeholder="Enter your first name"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
+            placeholder={t("admissionForm.fields.firstName.placeholder")}
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm dark:bg-accent/20 dark:text-white"
             {...register("firstName", {
-              required: "First name is required",
+              required: t("admissionForm.fields.firstName.error"),
               minLength: {
                 value: 2,
-                message: "First name must be at least 2 characters",
+                message: t("admissionForm.fields.firstName.minLength"),
               },
             })}
           />
@@ -50,18 +52,18 @@ function AdmissionForm() {
 
         {/* Last Name */}
         <div className="flex flex-col">
-          <label className="text-left mb-2 font-medium text-gray-700">
-            Last Name
+          <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+            {t("admissionForm.fields.lastName.label")}
           </label>
           <input
             type="text"
-            placeholder="Enter your last name"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
+            placeholder={t("admissionForm.fields.lastName.placeholder")}
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm dark:bg-accent/20 dark:text-white"
             {...register("lastName", {
-              required: "Last name is required",
+              required: t("admissionForm.fields.lastName.error"),
               minLength: {
                 value: 2,
-                message: "Last name must be at least 2 characters",
+                message: t("admissionForm.fields.lastName.minLength"),
               },
             })}
           />
@@ -74,18 +76,18 @@ function AdmissionForm() {
 
         {/* Email */}
         <div className="flex flex-col">
-          <label className="text-left mb-2 font-medium text-gray-700">
-            Email Address
+          <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+            {t("admissionForm.fields.email.label")}
           </label>
           <input
             type="email"
-            placeholder="Enter your email address"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
+            placeholder={t("admissionForm.fields.email.placeholder")}
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm dark:bg-accent/20 dark:text-white"
             {...register("email", {
-              required: "Email is required",
+              required: t("admissionForm.fields.email.error"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
+                message: t("admissionForm.fields.email.invalid"),
               },
             })}
           />
@@ -98,18 +100,18 @@ function AdmissionForm() {
 
         {/* Phone */}
         <div className="flex flex-col">
-          <label className="text-left mb-2 font-medium text-gray-700">
-            Phone Number
+          <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+            {t("admissionForm.fields.phone.label")}
           </label>
           <input
             type="tel"
-            placeholder="Enter your phone number"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
+            placeholder={t("admissionForm.fields.phone.placeholder")}
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm dark:bg-accent/20 dark:text-white"
             {...register("phone", {
-              required: "Phone number is required",
+              required: t("admissionForm.fields.phone.error"),
               pattern: {
                 value: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
-                message: "Invalid phone number",
+                message: t("admissionForm.fields.phone.invalid"),
               },
             })}
           />
@@ -122,14 +124,14 @@ function AdmissionForm() {
 
         {/* City */}
         <div className="flex flex-col">
-          <label className="text-left mb-2 font-medium text-gray-700">
-            City
+          <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+            {t("admissionForm.fields.city.label")}
           </label>
           <input
             type="text"
-            placeholder="Enter your city"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
-            {...register("city", { required: "City is required" })}
+            placeholder={t("admissionForm.fields.city.placeholder")}
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm dark:bg-accent/20 dark:text-white"
+            {...register("city", { required: t("admissionForm.fields.city.error") })}
           />
           {errors?.city?.message && (
             <span className="mt-1 text-sm text-left text-red-600 dark:text-red-400">
@@ -140,14 +142,14 @@ function AdmissionForm() {
 
         {/* Country */}
         <div className="flex flex-col">
-          <label className="text-left mb-2 font-medium text-gray-700">
-            Country
+          <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+            {t("admissionForm.fields.country.label")}
           </label>
           <input
             type="text"
-            placeholder="Enter your country"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm"
-            {...register("country", { required: "Country is required" })}
+            placeholder={t("admissionForm.fields.country.placeholder")}
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm dark:bg-accent/20 dark:text-white"
+            {...register("country", { required: t("admissionForm.fields.country.error") })}
           />
           {errors?.country?.message && (
             <span className="mt-1 text-sm text-left text-red-600 dark:text-red-400">
@@ -159,19 +161,19 @@ function AdmissionForm() {
 
       {/* Preferred Communication Method */}
       <div className="flex flex-col">
-        <label className="text-left mb-2 font-medium text-gray-700">
-          Choose a Messenger for communication
+        <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+          {t("admissionForm.fields.communicationMethod.label")}
         </label>
         <select
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm bg-white"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm bg-white dark:bg-accent/20 dark:text-white"
           {...register("communicationMethod", {
-            required: "Please select a communication method",
+            required: t("admissionForm.fields.communicationMethod.error"),
           })}
         >
-          <option value="">Select your preferred communication method</option>
-          <option value="whatsapp">WhatsApp</option>
-          <option value="telegram">Telegram</option>
-          <option value="email">Email</option>
+          <option value="">{t("admissionForm.fields.communicationMethod.placeholder")}</option>
+          <option value="whatsapp">{t("admissionForm.fields.communicationMethod.options.whatsapp")}</option>
+          <option value="telegram">{t("admissionForm.fields.communicationMethod.options.telegram")}</option>
+          <option value="email">{t("admissionForm.fields.communicationMethod.options.email")}</option>
         </select>
         {errors?.communicationMethod?.message && (
           <span className="mt-1 text-sm text-left text-red-600 dark:text-red-400">
@@ -182,18 +184,18 @@ function AdmissionForm() {
 
       {/* Expert Consultation */}
       <div className="flex flex-col">
-        <label className="text-left mb-2 font-medium text-gray-700">
-          Would you like an expert consultation with the admission process?
+        <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+          {t("admissionForm.fields.consultation.label")}
         </label>
         <select
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm bg-white"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm bg-white dark:bg-accent/20 dark:text-white"
           {...register("needConsultation", {
-            required: "Please select an option",
+            required: t("admissionForm.fields.consultation.error"),
           })}
         >
-          <option value="">Choose your preference</option>
-          <option value="yes">Yes, I would like a consultation</option>
-          <option value="no">No, thank you</option>
+          <option value="">{t("admissionForm.fields.consultation.placeholder")}</option>
+          <option value="yes">{t("admissionForm.fields.consultation.options.yes")}</option>
+          <option value="no">{t("admissionForm.fields.consultation.options.no")}</option>
         </select>
         {errors?.needConsultation?.message && (
           <span className="mt-1 text-sm text-left text-red-600 dark:text-red-400">
@@ -204,17 +206,16 @@ function AdmissionForm() {
 
       {/* Education Grant */}
       <div className="flex flex-col">
-        <label className="text-left mb-2 font-medium text-gray-700">
-          Would you like to receive an Education Grant from Vanguard Educational
-          Company?
+        <label className="text-left mb-2 font-medium text-gray-700 dark:text-gray-200">
+          {t("admissionForm.fields.grant.label")}
         </label>
         <select
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm bg-white"
-          {...register("needGrant", { required: "Please select an option" })}
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent shadow-sm bg-white dark:bg-accent/20 dark:text-white"
+          {...register("needGrant", { required: t("admissionForm.fields.grant.error") })}
         >
-          <option value="">Choose your preference</option>
-          <option value="yes">Yes, I'm interested in receiving a grant</option>
-          <option value="no">No, thank you</option>
+          <option value="">{t("admissionForm.fields.grant.placeholder")}</option>
+          <option value="yes">{t("admissionForm.fields.grant.options.yes")}</option>
+          <option value="no">{t("admissionForm.fields.grant.options.no")}</option>
         </select>
         {errors?.needGrant?.message && (
           <span className="mt-1 text-sm text-left text-red-600 dark:text-red-400">
@@ -226,9 +227,9 @@ function AdmissionForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full px-6 py-4 text-white bg-primary hover:bg-primary-dark rounded-lg transition duration-300 disabled:opacity-50 shadow-lg hover:shadow-xl font-semibold text-lg"
+        className="w-full px-6 py-4 text-white bg-primary hover:bg-primary-dark dark:bg-primary/90 dark:hover:bg-primary rounded-lg transition duration-300 disabled:opacity-50 shadow-lg hover:shadow-xl font-semibold text-lg"
       >
-        {isPending ? "Submitting..." : "Submit Application"}
+        {isPending ? t("admissionForm.submit.submitting") : t("admissionForm.submit.button")}
       </button>
     </form>
   );

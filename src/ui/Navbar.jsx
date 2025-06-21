@@ -15,6 +15,7 @@ import {
   Pen,
   Shield,
   Pointer,
+  GraduationCap,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import logo from "../assets/logoLight.png";
@@ -124,6 +125,13 @@ function Navbar() {
               >
                 <Pointer size={18} />
                 {t("nav.joinTeam")}
+              </Link>
+              <Link
+                to="/University-Partnership"
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white transition-all rounded-md hover:text-green-100 hover:scale-105"
+              >
+                <GraduationCap size={18} />
+                {t("nav.University-Partnership")}
               </Link>
             </div>
           </div>

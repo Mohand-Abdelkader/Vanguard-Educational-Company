@@ -6,7 +6,8 @@
     "activities": "Activities",
     "aboutUs": "About Us",
     "blogs": "Blogs",
-    "joinTeam": "Join Our Team"
+    "joinTeam": "Join Our Team",
+    "University-Partnership": "University Partnership"
   },
   "language": {
     "english": "English",
@@ -158,5 +159,99 @@
     "coverLetterPlaceholder": "Tell us why you'd like to join our team...",
     "submit": "Submit Application",
     "submitting": "Submitting..."
+  },
+  "nobel": {
+    "hero": {
+      "title": "Your Global Future Starts Here",
+      "subtitle": "World-Class Education, Right Where You Are",
+      "learnMore": "Learn More"
+    },
+    "features": {
+      "dualDiplomas": {
+        "title": "Dual Diplomas",
+        "description": "International Degrees with Local Access"
+      },
+      "exchangePrograms": {
+        "title": "Exchange Programs",
+        "description": "No Borders, No Limits — Just Opportunity"
+      },
+      "recognition": {
+        "title": "International Recognition",
+        "description": "Global Opportunities Await"
+      }
+    },
+    "cta": {
+      "title": "Apply Now and Get Your Grant for 2025!"
+    }
+  },
+  "admissionForm": {
+    "fields": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name",
+        "error": "First name is required",
+        "minLength": "First name must be at least 2 characters"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name",
+        "error": "Last name is required",
+        "minLength": "Last name must be at least 2 characters"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address",
+        "error": "Email is required",
+        "invalid": "Invalid email address"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "error": "Phone number is required",
+        "invalid": "Invalid phone number"
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "Enter your city",
+        "error": "City is required"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Enter your country",
+        "error": "Country is required"
+      },
+      "communicationMethod": {
+        "label": "Choose a Messenger for communication",
+        "placeholder": "Select your preferred communication method",
+        "error": "Please select a communication method",
+        "options": {
+          "whatsapp": "WhatsApp",
+          "telegram": "Telegram",
+          "email": "Email"
+        }
+      },
+      "consultation": {
+        "label": "Would you like an expert consultation with the admission process?",
+        "placeholder": "Choose your preference",
+        "error": "Please select an option",
+        "options": {
+          "yes": "Yes, I would like a consultation",
+          "no": "No, thank you"
+        }
+      },
+      "grant": {
+        "label": "Would you like to receive an Education Grant from Vanguard Educational Company?",
+        "placeholder": "Choose your preference",
+        "error": "Please select an option",
+        "options": {
+          "yes": "Yes, I'm interested in receiving a grant",
+          "no": "No, thank you"
+        }
+      }
+    },
+    "submit": {
+      "button": "Submit Application",
+      "submitting": "Submitting..."
+    }
   }
 }
